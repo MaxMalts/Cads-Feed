@@ -20,7 +20,7 @@ export default function Card({cardData}) {
 
             <div className={styles.footer}>
                 <span className={styles.likesAmt}>{curLikes}</span>
-                <button className={styles.likeBtn} onClick={onLikeClick}>
+                <button className={styles.likeBtn + (liked ? (' ' + styles.likeBtnLiked) : '')} onClick={onLikeClick}>
                     <img src={liked ? like_liked : like_unliked} alt='' />
                 </button>
             </div>
