@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import like_unliked from '../assets/like_unliked.svg';
-import like_liked from '../assets/like_liked.svg';
+import like_unliked from '../assets/icons/like_unliked.svg';
+import like_liked from '../assets/icons/like_liked.svg';
 import styles from './Card.module.css';
 
 export default function Card({cardData}) {
@@ -11,7 +11,6 @@ export default function Card({cardData}) {
         liked ? setCurLikes(curLikes - 1) : setCurLikes(curLikes + 1);
         setLiked(!liked);
     }
-    console.log(cardData);
 
     return (
         <div className={styles.container}>
