@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import CommentsSection from './CommentsSection.js';
 import likeUnliked from '../assets/icons/likeUnliked.svg';
 import likeLiked from '../assets/icons/likeLiked.svg';
 import comment from '../assets/icons/comment.svg';
@@ -8,7 +9,7 @@ export default function Card({title, text, currentLikes, commentsCount}) {
     const [curLikes, setCurLikes] = useState(currentLikes);
     const [liked, setLiked] = useState(false);
 
-    const [curComments, setCurComments] = useState(commentsCount);
+    const [commentsCount, setCommentsCount] = useState(commentsCount);
     const [commentsOpened, setCommentsOpened] = useState(false);
 
     const onLikeClick = () => {
@@ -21,7 +22,7 @@ export default function Card({title, text, currentLikes, commentsCount}) {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={styles.cardContainer}>
             <h3 className={styles.title}>{title}</h3>
             <p className={styles.description}>{text}</p>
 
@@ -33,7 +34,7 @@ export default function Card({title, text, currentLikes, commentsCount}) {
                     >
                         <img className={styles.commentBtnImg} src={comment} alt='' />
                     </button>
-                    <span className={styles.commentsAmt}>{curComments}</span>
+                    <span className={styles.commentsAmt}>{commentsCount}</span>
                 </div>
 
                 <div className={styles.like}>
@@ -43,6 +44,13 @@ export default function Card({title, text, currentLikes, commentsCount}) {
                     </button>
                 </div>
             </div>
+
+            {commentsOpened && (
+                <>
+                    <hr className={styles.separator} />
+                    <CommentsSection articleId={cardData.articleId}></CommentsSection>
+                </>
+            )}
         </div>
     )
 }

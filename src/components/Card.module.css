@@ -1,4 +1,4 @@
-.container {
+.cardContainer {
     padding: 20px 30px;
     border: 2px solid #000;
     border-radius: 20px;
@@ -88,4 +88,8 @@
     margin-left: 8px;
     font-size: 1.2rem;
     vertical-align: middle;
+}
+
+.separator {
+    margin: 8px 0px;
 }

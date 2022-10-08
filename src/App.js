@@ -1,4 +1,4 @@
-import cardsData from './assets/data.json';
+import cardsData from './assets/data/articles.json';
 import Card from './components/Card.js';
 import styles from './App.module.css';
 
