@@ -15,11 +15,15 @@ export default class CommentsSection extends React.Component {
         })
     }
 
+    onCommentDelete(id) {
+        this.setState(() => this.state.comments.filter(item => item.id != id));
+    }
+
     render() {
         return (
             <div className={styles.commentsContainer}>
                 {this.state.comments.map(item => (
-                    <div key={item.text} className={styles.comment}>
+                    <div key={item.id} className={styles.comment}>
                         <Comment commentData={item}></Comment>
                     </div>
                 ))}
