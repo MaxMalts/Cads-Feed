@@ -17,26 +17,27 @@
 .footer {
     margin-top: 30px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .likesAmt {
     font-size: 1.2rem;
-    position: relative;
-    top: 2px;
+    vertical-align: middle;
 }
 
 .likeBtn {
+    display: inline-block;
     width: 30px;
     height: 30px;
     margin-left: 8px;
-    cursor: pointer;
+    vertical-align: middle;
 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
-    appearance: none;
+    cursor: pointer;
+}
+
+.likeBtnImg {
+    width: 100%;
+    vertical-align: middle;
 }
 
 .likeBtnLiked {
@@ -55,4 +56,36 @@
     to {
         transform: scale(1);
     }
+}
+
+
+.commentBtn {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+
+    padding: 3px;
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    border-radius: 5px;
+    background: transparent;
+    transition: background-color 200ms;
+}
+
+.commentBtnImg {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.commentBtnOpened {
+    background-color: #eee;
+}
+
+.commentsAmt {
+    margin-left: 8px;
+    font-size: 1.2rem;
+    vertical-align: middle;
 }
