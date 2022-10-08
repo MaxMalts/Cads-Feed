@@ -21,6 +21,14 @@ export default function Card({title, text, currentLikes, commentsCount}) {
         setCommentsOpened(!commentsOpened);
     }
 
+    const onCommentAdded = () => {
+        setCommentsCount(commentsCount + 1);
+    }
+
+    const onCommentDeleted = () => {
+        setCommentsCount(commentsCount - 1);
+    }
+
     return (
         <div className={styles.cardContainer}>
             <h3 className={styles.title}>{title}</h3>
@@ -48,7 +56,11 @@ export default function Card({title, text, currentLikes, commentsCount}) {
             {commentsOpened && (
                 <>
                     <hr className={styles.separator} />
-                    <CommentsSection articleId={cardData.articleId}></CommentsSection>
+                    <CommentsSection
+                        articleId={cardData.articleId}
+                        onCommentAdded={onCommentAdded}
+                        onCommentDeleted={onCommentDeleted}
+                    ></CommentsSection>
                 </>
             )}
         </div>

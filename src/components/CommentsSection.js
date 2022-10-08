@@ -16,7 +16,8 @@ export default class CommentsSection extends React.Component {
     }
 
     onCommentDelete(id) {
-        this.setState(() => this.state.comments.filter(item => item.id != id));
+        this.setState({comments: this.state.comments.filter(item => item.id != id)});
+        this.props.onCommentDeleted();
     }
 
     render() {
@@ -24,7 +25,7 @@ export default class CommentsSection extends React.Component {
             <div className={styles.commentsContainer}>
                 {this.state.comments.map(item => (
                     <div key={item.id} className={styles.comment}>
-                        <Comment commentData={item}></Comment>
+                        <Comment commentData={item} onDelete={this.onCommentDelete.bind(this, item.id)}></Comment>
                     </div>
                 ))}
             </div>

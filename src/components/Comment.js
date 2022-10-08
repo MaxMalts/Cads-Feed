@@ -14,7 +14,7 @@ export default function Comment(props) {
                 </p>
             </div>
 
-            <button className={styles.deleteBtn}>
+            <button className={styles.deleteBtn} onClick={props.onDelete}>
                 <img className={styles.deleteBtnImg} src={deleteIcon} alt='delete'/>
             </button>
         </div>
