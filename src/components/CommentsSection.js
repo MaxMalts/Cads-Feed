@@ -2,6 +2,7 @@ import React from 'react';
 import Comment from './Comment.js';
 import submitIcon from '../assets/icons/send.svg'
 import styles from './CommentsSection.module.css';
+import baseStyles from '../assets/styles/base.module.css';
 import {getComments} from '../assets/helpers/get-comments-by-article.js';
 
 export default class CommentsSection extends React.Component {
@@ -60,15 +61,17 @@ export default class CommentsSection extends React.Component {
                     onSubmit={this.onCommentSubmit}
                 >
                     <input
-                        className={styles.nameInput} ref={this.nameInput} type='text' name='name'
+                        className={baseStyles.inputField + ' ' + styles.nameInput} ref={this.nameInput} type='text'
+                        name='name'
                         placeholder='Enter your name' maxLength='50' required
                     />
                     <textarea
-                        className={styles.commentInput} ref={this.commentInput} name='comment'
+                        className={baseStyles.inputField + ' ' + styles.commentInput} ref={this.commentInput}
+                        name='comment'
                         placeholder='Enter your comment'
                         required
                     />
-                    <button className={styles.submitBtn} type='submit'>
+                    <button className={baseStyles.button + ' ' + styles.submitBtn} type='submit'>
                         <span className={styles.submitBtnText}>Comment</span>
                         <img className={styles.submitBtnImg} src={submitIcon} alt='send'/>
                     </button>

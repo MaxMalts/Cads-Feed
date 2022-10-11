@@ -14,52 +14,24 @@
 
     border: solid #000 1px;
     border-radius: 5px;
-
-    --input-field-bg: #f7f7f7;
 }
 
 .nameInput {
     display: block;
     width: 50%;
     min-width: 150px;
-    padding: 7px 10px;
-    box-sizing: border-box;
-
-    border: solid #000 1px;
-    border-radius: 8px;
-    background: var(--input-field-bg);
 }
 
 .commentInput {
     margin-top: 8px;
     width: 100%;
     min-height: 5rem;
-    padding: 7px 10px;
-    box-sizing: border-box;
-
-    border: solid #000 1px;
-    border-radius: 5px;
-    background: var(--input-field-bg);
 
     resize: none;
 }
 
 .submitBtn {
     margin-top: 8px;
-    padding: 5px;
-    box-sizing: border-box;
-
-    border: solid #000 1px;
-    border-radius: 3px;
-    background: var(--input-field-bg);
-
-    cursor: pointer;
-
-    transition: filter 50ms;
-}
-
-.submitBtn:hover {
-    filter: brightness(0.95);
 }
 
 .submitBtnText {
