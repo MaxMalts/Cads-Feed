@@ -7,6 +7,7 @@ import {getComments} from '../assets/helpers/get-comments-by-article.js';
 
 export default class CommentsSection extends React.Component {
     state = {
+        loading: true,
         comments: []
     }
 
@@ -22,7 +23,10 @@ export default class CommentsSection extends React.Component {
 
     componentDidMount() {
         getComments(this.props.articleId).then(comments => {
-            this.setState({comments: [...comments]});
+            this.setState({
+                loading: false,
+                comments: [...comments]
+            });
         })
     }
 
@@ -50,11 +54,15 @@ export default class CommentsSection extends React.Component {
     render() {
         return (
             <div className={styles.commentsContainer}>
-                {this.state.comments.map(item => (
-                    <div key={item.id} className={styles.comment}>
-                        <Comment commentData={item} onDelete={() => this.onCommentDelete(item.id)}></Comment>
-                    </div>
-                ))}
+                {this.state.loading
+                    ? 'Loading...'
+                    : this.state.comments.map(item => (
+                        <div key={item.id} className={styles.comment}>
+                            <Comment commentData={item} onDelete={() => this.onCommentDelete(item.id)}></Comment>
+                        </div>
+
+                    ))
+                }
 
                 <form
                     className={styles.commentForm} ref={this.commentForm} name='newComment'

@@ -14,11 +14,11 @@
 
 .button {
     display: inline-block;
-    padding: 5px;
+    padding: 5px 10px;
     box-sizing: border-box;
 
     border: solid #000 1px;
-    border-radius: 3px;
+    border-radius: 5px;
     background: var(--input-field-bg);
 
     cursor: pointer;

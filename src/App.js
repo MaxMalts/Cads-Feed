@@ -72,7 +72,9 @@ export class App extends React.Component {
                     }
                 </main>
 
-                <button className={baseStyles.button} onClick={this.onCreateCardClick}>Add new card</button>
+                <button className={baseStyles.button + ' ' + styles.newCardBtn} onClick={this.onCreateCardClick}>
+                    Add new card
+                </button>
 
                 {this.state.creatingCard &&
                     <Popup>
