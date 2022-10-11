@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import like_unliked from '../assets/icons/likeUnliked.svg';
-import like_liked from '../assets/icons/likeLiked.svg';
+import likeUnliked from '../assets/icons/likeUnliked.svg';
+import likeLiked from '../assets/icons/likeLiked.svg';
 import styles from './Card.module.css';
 
 export default function Card({title, text, currentLikes}) {
@@ -20,7 +20,7 @@ export default function Card({title, text, currentLikes}) {
             <div className={styles.footer}>
                 <span className={styles.likesAmt}>{curLikes}</span>
                 <button className={styles.likeBtn + (liked ? (' ' + styles.likeBtnLiked) : '')} onClick={onLikeClick}>
-                    <img src={liked ? like_liked : like_unliked} alt='' />
+                    <img src={liked ? likeLiked : likeUnliked} alt='' />
                 </button>
             </div>
         </div>
