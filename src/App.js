@@ -9,7 +9,7 @@ function App() {
             <main className={styles.pageContainer}>
                 {cardsData.map(item => (
                     <div key={item.title} className={styles.card}>
-                        <Card cardData={item}></Card>
+                        <Card title={item.title} text={item.text} currentLikes={item.currentLikes}></Card>
                     </div>
                 ))}
             </main>

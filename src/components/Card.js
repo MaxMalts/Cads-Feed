@@ -1,10 +1,10 @@
 import {useState} from 'react';
-import like_unliked from '../assets/icons/like_unliked.svg';
-import like_liked from '../assets/icons/like_liked.svg';
+import like_unliked from '../assets/icons/likeUnliked.svg';
+import like_liked from '../assets/icons/likeLiked.svg';
 import styles from './Card.module.css';
 
-export default function Card({cardData}) {
-    const [curLikes, setCurLikes] = useState(cardData.currentLikes);
+export default function Card({title, text, currentLikes}) {
+    const [curLikes, setCurLikes] = useState(currentLikes);
     const [liked, setLiked] = useState(false);
 
     const onLikeClick = () => {
@@ -14,8 +14,8 @@ export default function Card({cardData}) {
 
     return (
         <div className={styles.container}>
-            <h3 className={styles.title}>{cardData.title}</h3>
-            <p className={styles.description}>{cardData.text}</p>
+            <h3 className={styles.title}>{title}</h3>
+            <p className={styles.description}>{text}</p>
 
             <div className={styles.footer}>
                 <span className={styles.likesAmt}>{curLikes}</span>
