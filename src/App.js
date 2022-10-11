@@ -1,13 +1,24 @@
 import React from 'react';
 import {getArticles} from './assets/helpers/get-articles';
 import Card from './components/Card.js';
+import NewCard from './components/NewCard.js';
+import Popup from './components/Popup';
+import baseStyles from './assets/styles/base.module.css';
 import styles from './App.module.css';
 
 
 export class App extends React.Component {
     state = {
         loading: true,
-        cards: []
+        cards: [],
+        creatingCard: false
+    }
+
+    constructor(props) {
+        super(props);
+
+        this.onCreateCardClick = this.onCreateCardClick.bind(this);
+        this.onCardCreation = this.onCardCreation.bind(this);
     }
 
     componentDidMount() {
@@ -17,6 +28,29 @@ export class App extends React.Component {
                 cards: cards
             });
         })
+    }
+
+    onCreateCardClick() {
+        this.setState({
+            ...this.state,
+            creatingCard: true
+        });
+    }
+
+    onCardCreation(title, description) {
+        this.setState({
+            ...this.state,
+            cards: this.state.cards.concat({
+                articleId: this.state.cards.reduce(
+                    (prev, cur) => prev > cur.articleId ? prev : cur.articleId, 0
+                ) + 1,  // max + 1
+                title: title,
+                text: description,
+                currentLikes: 0,
+                commentsCount: 0
+            }),
+            creatingCard: false
+        });
     }
 
     render() {
@@ -37,6 +71,14 @@ export class App extends React.Component {
                         ))
                     }
                 </main>
+
+                <button className={baseStyles.button} onClick={this.onCreateCardClick}>Add new card</button>
+
+                {this.state.creatingCard &&
+                    <Popup>
+                        <NewCard onCreated={this.onCardCreation}></NewCard>
+                    </Popup>
+                }
             </div>
         );
     }

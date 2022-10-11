@@ -28,3 +28,7 @@ button {
     -o-appearance: none;
     appearance: none;
 }
+
+textarea {
+    resize: none;
+}
