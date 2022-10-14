@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import cardsData from './assets/data.json';
+import Card from './components/Card.js';
+import styles from './App.module.css';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className={styles.app}>
+            <main className={styles.pageContainer}>
+                {cardsData.map(item => (
+                    <div key={item.title} className={styles.card}>
+                        <Card
+                            title={item.title}
+                            text={item.text}
+                            currentLikes={item.currentLikes}
+                        />
+                    </div>
+                ))}
+            </main>
+        </div>
+    );
 }
 
 export default App;

@@ -1,0 +1,58 @@
+.container {
+    padding: 20px 30px;
+    border: 2px solid #000;
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.description {
+    margin-top: 30px;
+}
+
+.footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.likesAmt {
+    font-size: 1.2rem;
+    position: relative;
+    top: 2px;
+}
+
+.likeBtn {
+    width: 30px;
+    height: 30px;
+    margin-left: 8px;
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+.likeBtnLiked {
+    animation: likeAnim 200ms;
+}
+
+@keyframes likeAnim {
+    from {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
