@@ -1,4 +1,4 @@
-@import '../assets/styles/baseVariables.scss';
+@import '../assets/styles/baseVariables';
 
 .pageContainer {
     position: fixed;
@@ -28,6 +28,6 @@
     padding: 50px;
     text-align: center;
 
-    background: $primary-color;
+    background: var(--primary-color);
     border-radius: 20px;
 }
