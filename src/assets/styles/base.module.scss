@@ -1,6 +1,4 @@
-:root {
-    --input-field-bg: #f7f7f7;
-}
+$input-field-bg: #f7f7f7;
 
 .inputField {
     display: block;
@@ -9,7 +7,7 @@
 
     border: solid #000 1px;
     border-radius: 5px;
-    background: var(--input-field-bg);
+    background: $input-field-bg;
 }
 
 .button {
@@ -19,13 +17,13 @@
 
     border: solid #000 1px;
     border-radius: 5px;
-    background: var(--input-field-bg);
+    background: $input-field-bg;
 
     cursor: pointer;
 
     transition: filter 50ms;
-}
-
-.button:hover {
-    filter: brightness(0.95);
+    
+    &:hover {
+        filter: brightness(0.95);
+    }
 }

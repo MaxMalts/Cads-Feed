@@ -4,6 +4,7 @@ import likeUnliked from '../assets/icons/likeUnliked.svg';
 import likeLiked from '../assets/icons/likeLiked.svg';
 import comment from '../assets/icons/comment.svg';
 import styles from './Card.module.scss';
+import classNames from 'classnames/bind';
 
 export default function Card({articleId, title, text, currentLikes, curCommentsCount}) {
     const [curLikes, setCurLikes] = useState(currentLikes);
@@ -11,6 +12,8 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
 
     const [commentsCount, setCommentsCount] = useState(curCommentsCount);
     const [commentsOpened, setCommentsOpened] = useState(false);
+
+    const cx = classNames.bind(styles);
 
     const onLikeClick = () => {
         liked ? setCurLikes(curLikes - 1) : setCurLikes(curLikes + 1);
@@ -35,27 +38,36 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
             <p className={styles.description}>{text}</p>
 
             <div className={styles.footer}>
-                <div className={styles.comment}>
+                <div>
                     <button
-                        className={styles.commentBtn + (commentsOpened ? (' ' + styles.commentBtnOpened) : '')}
+                        className={cx({
+                            commentBtn: true,
+                            commentBtnOpened: commentsOpened
+                        })}
                         onClick={onCommentClick}
                     >
-                        <img className={styles.commentBtnImg} src={comment} alt='' />
+                        <img className={styles.commentBtnImg} src={comment} alt=''/>
                     </button>
                     <span className={styles.commentsAmt}>{commentsCount}</span>
                 </div>
 
-                <div className={styles.like}>
+                <div>
                     <span className={styles.likesAmt}>{curLikes}</span>
-                    <button className={styles.likeBtn + (liked ? (' ' + styles.likeBtnLiked) : '')} onClick={onLikeClick}>
-                        <img className={styles.likeBtnImg} src={liked ? likeLiked : likeUnliked} alt='' />
+                    <button
+                        className={cx({
+                            likeBtn: true,
+                            likeBtnLiked: liked
+                        })}
+                        onClick={onLikeClick}
+                    >
+                        <img className={styles.likeBtnImg} src={liked ? likeLiked : likeUnliked} alt=''/>
                     </button>
                 </div>
             </div>
 
             {commentsOpened && (
                 <>
-                    <hr className={styles.separator} />
+                    <hr className={styles.separator}/>
                     <CommentsSection
                         articleId={articleId}
                         onCommentAdded={onCommentAdded}
@@ -64,5 +76,5 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
                 </>
             )}
         </div>
-    )
+    );
 }

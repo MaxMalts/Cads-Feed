@@ -79,15 +79,15 @@
     border-radius: 5px;
     background: transparent;
     transition: background-color 200ms;
+
+    &.commentBtnOpened {
+        background-color: #eee;
+    }
 }
 
 .commentBtnImg {
     width: 100%;
     vertical-align: middle;
-}
-
-.commentBtnOpened {
-    background-color: #eee;
 }
 
 .commentsAmt {
