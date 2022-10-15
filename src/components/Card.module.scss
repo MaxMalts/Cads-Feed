@@ -1,5 +1,7 @@
 @import '../assets/styles/baseVariables.scss';
 
+$action-button-size: 30px;
+
 @mixin cardContainerPadding($vertical, $horizontal: $vertical) {
     padding: $vertical $horizontal;
 }
@@ -59,8 +61,8 @@
 
 .likeBtn {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: $action-button-size;
+    height: $action-button-size;
     margin-left: 8px;
     vertical-align: middle;
 
@@ -99,8 +101,8 @@
 
 .commentBtn {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: $action-button-size;
+    height: $action-button-size;
     vertical-align: middle;
 
     padding: 3px;

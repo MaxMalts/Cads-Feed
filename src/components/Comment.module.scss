@@ -19,8 +19,10 @@
 }
 
 .deleteBtn {
-    width: 20px;
-    height: 20px;
+    $delete-btn-size: 20px;
+    
+    width: $delete-btn-size;
+    height: $delete-btn-size;
     padding: 3px;
     box-sizing: border-box;
     flex-grow: 0;
