@@ -3,8 +3,8 @@ import {getArticles} from './assets/helpers/get-articles';
 import Card from './components/Card.js';
 import NewCard from './components/NewCard.js';
 import Popup from './components/Popup';
-import baseStyles from './assets/styles/base.module.css';
-import styles from './App.module.css';
+import baseStyles from './assets/styles/base.module.scss';
+import styles from './App.module.scss';
 
 
 export class App extends React.Component {

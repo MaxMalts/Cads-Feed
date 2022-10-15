@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './NewCard.module.css';
-import baseStyles from '../assets/styles/base.module.css';
+import styles from './NewCard.module.scss';
+import baseStyles from '../assets/styles/base.module.scss';
 
 export default class NewCard extends React.Component {
     constructor(props) {

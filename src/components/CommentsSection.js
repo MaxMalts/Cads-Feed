@@ -1,8 +1,8 @@
 import React from 'react';
 import Comment from './Comment.js';
 import submitIcon from '../assets/icons/send.svg'
-import styles from './CommentsSection.module.css';
-import baseStyles from '../assets/styles/base.module.css';
+import styles from './CommentsSection.module.scss';
+import baseStyles from '../assets/styles/base.module.scss';
 import {getComments} from '../assets/helpers/get-comments-by-article.js';
 
 export default class CommentsSection extends React.Component {

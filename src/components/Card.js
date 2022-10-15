@@ -3,7 +3,7 @@ import CommentsSection from './CommentsSection.js';
 import likeUnliked from '../assets/icons/likeUnliked.svg';
 import likeLiked from '../assets/icons/likeLiked.svg';
 import comment from '../assets/icons/comment.svg';
-import styles from './Card.module.css';
+import styles from './Card.module.scss';
 
 export default function Card({articleId, title, text, currentLikes, curCommentsCount}) {
     const [curLikes, setCurLikes] = useState(currentLikes);
