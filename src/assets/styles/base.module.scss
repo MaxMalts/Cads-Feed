@@ -1,13 +1,13 @@
-$input-field-bg: #f7f7f7;
+@import './baseVariables';
 
 .inputField {
     display: block;
     padding: 7px 10px;
     box-sizing: border-box;
 
-    border: solid #000 1px;
+    border: solid $borders-color 1px;
     border-radius: 5px;
-    background: $input-field-bg;
+    background: var(--primary-color-soft);
 }
 
 .button {
@@ -15,9 +15,9 @@ $input-field-bg: #f7f7f7;
     padding: 5px 10px;
     box-sizing: border-box;
 
-    border: solid #000 1px;
+    border: solid $borders-color 1px;
     border-radius: 5px;
-    background: $input-field-bg;
+    background: var(--primary-color-soft);
 
     cursor: pointer;
 

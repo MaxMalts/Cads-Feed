@@ -1,16 +1,48 @@
+@import '../assets/styles/baseVariables.scss';
+
+@mixin cardContainerPadding($vertical, $horizontal: $vertical) {
+    padding: $vertical $horizontal;
+}
+
 .cardContainer {
-    padding: 20px 30px;
+    @include cardContainerPadding(20px, 30px);
+
     border: 2px solid #000;
     border-radius: 20px;
 
     text-align: center;
 }
 
-.title {
+@mixin checkSetFontSize($fontSize) {
+    @if $fontSize != 0 {
+        font-size: $fontSize;
+    }
+}
+
+@mixin titleFont($fontSize: 0) {
+    @include checkSetFontSize($fontSize);
+
     font-weight: bold;
+    font-style: normal;
+}
+
+.title {
+    @include titleFont();
+}
+
+@mixin descriptionFont($fontSize: 0) {
+    @include checkSetFontSize($fontSize);
+
+    font-weight: normal;
+    font-style: normal;
+
+    /* Хз на самом деле, что вам нужно, но вот какие-то миксины я сделал)
+    Если нужно было что-то другое, напишите. */
 }
 
 .description {
+    @include descriptionFont();
+
     margin-top: 30px;
 }
 
@@ -81,7 +113,7 @@
     transition: background-color 200ms;
 
     &.commentBtnOpened {
-        background-color: #eee;
+        background-color: var(--primary-color-soft);
     }
 }
 
@@ -97,5 +129,5 @@
 }
 
 .separator {
-    margin: 8px 0px;
+    margin: 8px 0;
 }

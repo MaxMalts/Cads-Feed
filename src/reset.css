@@ -20,6 +20,7 @@ button {
     background: none;
     outline: none;
     box-sizing: content-box;
+    color: inherit;
     -webkit-tap-highlight-color: transparent;
 
     -webkit-appearance: none;
@@ -31,4 +32,10 @@ button {
 
 textarea {
     resize: none;
+    color: inherit;
+}
+
+input {
+    color: inherit;
+    background: red;
 }

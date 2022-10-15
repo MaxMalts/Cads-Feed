@@ -1,1 +1,15 @@
-$primary-color: #fff;
+$borders-color: #000;
+
+:root {
+  --primary-color: #fff;
+  --primary-color-soft: #f7f7f7;
+  --secondary-color: #444
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #444;
+    --primary-color-soft: #555;
+    --secondary-color: #fff;
+  }
+}
