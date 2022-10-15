@@ -59,6 +59,7 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
                             likeBtnLiked: liked
                         })}
                         onClick={onLikeClick}
+
                     >
                         <img className={styles.likeBtnImg} src={liked ? likeLiked : likeUnliked} alt=''/>
                     </button>
