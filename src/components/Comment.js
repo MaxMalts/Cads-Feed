@@ -5,6 +5,13 @@ import Like from '../common-components/Like';
 export default function Comment({commentData, onLike, onDelete}) {
     return (
         <div className={styles.commentContainer}>
+            <div className={styles.header}>
+                <div className={styles.date}>{commentData.date}</div>
+                <button className={styles.deleteBtn} onClick={onDelete}>
+                    <img className={styles.deleteBtnImg} src={deleteIcon} alt="delete"/>
+                </button>
+            </div>
+
             <div className={styles.commentContent}>
                 <h5 className={styles.author}>
                     {commentData.author}
@@ -14,10 +21,6 @@ export default function Comment({commentData, onLike, onDelete}) {
                     {commentData.text}
                 </p>
             </div>
-
-            <button className={styles.deleteBtn} onClick={onDelete}>
-                <img className={styles.deleteBtnImg} src={deleteIcon} alt="delete"/>
-            </button>
 
             <div className={styles.likesContainer}>
                 <Like

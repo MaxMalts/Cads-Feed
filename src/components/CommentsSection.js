@@ -60,7 +60,7 @@ export default class CommentsSection extends React.Component {
                 articleId: this.props.articleId,
                 text: this.commentInput.current.value,
                 currentLikes: 0,
-                date: Date.now()
+                date: new Date().toISOString().split('T')[0]
             })
         });
 
