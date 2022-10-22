@@ -59,6 +59,7 @@ export default class CommentsSection extends React.Component {
                 author: this.nameInput.current.value,
                 articleId: this.props.articleId,
                 text: this.commentInput.current.value,
+                currentLikes: 0,
                 date: Date.now()
             })
         });
