@@ -31,18 +31,15 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
             <p className={styles.description}>{text}</p>
 
             <div className={styles.footer}>
-                <div>
-                    <button
-                        className={cx({
+                <button className={styles.commentsContainer} onClick={onCommentClick}>
+                    <div className={cx({
                             commentBtn: true,
                             btnOpened: commentsOpened
-                        })}
-                        onClick={onCommentClick}
-                    >
+                        })}>
                         <img className={styles.commentBtnImg} src={comment} alt=''/>
-                    </button>
+                    </div>
                     <span className={styles.commentsAmt}>{commentsCount}</span>
-                </div>
+                </button>
 
                 <Like curLikes={curLikes} counterStyle={styles.likesAmt} likeStyle={styles.likeBtn} />
             </div>

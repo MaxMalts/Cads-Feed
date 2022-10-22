@@ -14,17 +14,16 @@ export default function Like({curLikes, counterStyle, likeStyle}) {
     }
 
     return (
-        <div className={styles.container}>
+        <button className={styles.container} onClick={onLikeClick}>
             <span className={classNames(styles.likesAmt, counterStyle)}>{curLikes + (liked ? 1 : 0)}</span>
-            <button
+            <span
                 className={classNames(cx({
                     likeBtn: true,
                     likeBtnLiked: liked
                 }), likeStyle)}
-                onClick={onLikeClick}
             >
                 <img className={styles.likeBtnImg} src={liked ? likeLiked : likeUnliked} alt=''/>
-            </button>
-        </div>
+            </span>
+        </button>
     );
 }
