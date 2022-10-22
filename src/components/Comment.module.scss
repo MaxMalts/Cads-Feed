@@ -1,5 +1,7 @@
+@import '../assets/styles/baseVariables.scss';
+
 .commentContainer {
-    padding: 7px 10px;
+    padding: 10px;
     border: solid black 1px;
     border-radius: 10px;
 
@@ -7,6 +9,10 @@
     justify-content: stretch;
     align-items: center;
     gap: 20px;
+
+    background: var(--primary-color);
+
+    position: relative;
 }
 
 .commentContent {
@@ -33,4 +39,25 @@
 
 .deleteBtnImg {
     width: 100%;
+}
+
+.likesContainer {
+    position: absolute;
+    right: 8px;
+    bottom: 0;
+    transform: translateY(40%);
+    padding: 0 4px;
+
+    background-color: inherit;
+}
+
+.likesAmt {
+    font-size: 0.7rem;
+}
+
+.likeBtn {
+    width: 10px;
+    height: 10px;
+    margin-left: 4px;
+    line-height: 0.7rem;
 }

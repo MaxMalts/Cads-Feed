@@ -1,24 +1,17 @@
 import {useState} from 'react';
+import Like from '../common-components/Like';
 import CommentsSection from './CommentsSection.js';
-import likeUnliked from '../assets/icons/likeUnliked.svg';
-import likeLiked from '../assets/icons/likeLiked.svg';
 import comment from '../assets/icons/comment.svg';
 import styles from './Card.module.scss';
 import classNames from 'classnames/bind';
 
+const cx = classNames.bind(styles);
+
 export default function Card({articleId, title, text, currentLikes, curCommentsCount}) {
-    const [curLikes, setCurLikes] = useState(currentLikes);
-    const [liked, setLiked] = useState(false);
+    const [curLikes] = useState(currentLikes);
 
     const [commentsCount, setCommentsCount] = useState(curCommentsCount);
     const [commentsOpened, setCommentsOpened] = useState(false);
-
-    const cx = classNames.bind(styles);
-
-    const onLikeClick = () => {
-        liked ? setCurLikes(curLikes - 1) : setCurLikes(curLikes + 1);
-        setLiked(!liked);
-    }
 
     const onCommentClick = () => {
         setCommentsOpened(!commentsOpened);
@@ -51,19 +44,7 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
                     <span className={styles.commentsAmt}>{commentsCount}</span>
                 </div>
 
-                <div>
-                    <span className={styles.likesAmt}>{curLikes}</span>
-                    <button
-                        className={cx({
-                            likeBtn: true,
-                            likeBtnLiked: liked
-                        })}
-                        onClick={onLikeClick}
-
-                    >
-                        <img className={styles.likeBtnImg} src={liked ? likeLiked : likeUnliked} alt=''/>
-                    </button>
-                </div>
+                <Like curLikes={curLikes} counterStyle={styles.likesAmt} likeStyle={styles.likeBtn} />
             </div>
 
             {commentsOpened && (
