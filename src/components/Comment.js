@@ -1,22 +1,30 @@
 import deleteIcon from '../assets/icons/delete.svg'
 import styles from './Comment.module.scss';
+import Like from '../common-components/Like';
 
-export default function Comment(props) {
+export default function Comment({commentData, onLike, onDelete}) {
     return (
         <div className={styles.commentContainer}>
             <div className={styles.commentContent}>
                 <h5 className={styles.author}>
-                    {props.commentData.author}
+                    {commentData.author}
                 </h5>
-                <hr className={styles.separator} />
+                <hr className={styles.separator}/>
                 <p className={styles.commentText}>
-                    {props.commentData.text}
+                    {commentData.text}
                 </p>
             </div>
 
-            <button className={styles.deleteBtn} onClick={props.onDelete}>
-                <img className={styles.deleteBtnImg} src={deleteIcon} alt='delete'/>
+            <button className={styles.deleteBtn} onClick={onDelete}>
+                <img className={styles.deleteBtnImg} src={deleteIcon} alt="delete"/>
             </button>
+
+            <div className={styles.likesContainer}>
+                <Like
+                    curLikes={commentData.currentLikes} counterStyle={styles.likesAmt}
+                    likeStyle={styles.likeBtn}
+                />
+            </div>
         </div>
     );
 }

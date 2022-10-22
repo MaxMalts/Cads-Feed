@@ -1,0 +1,47 @@
+@import '../assets/styles/baseVariables.scss';
+
+.container {
+    white-space: nowrap;
+}
+
+.likesAmt {
+    vertical-align: middle;
+}
+
+.likeBtn {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    vertical-align: middle;
+
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+.likeBtnImg {
+    width: 100%;
+}
+
+.likeBtnLiked {
+    animation: likeAnim 200ms;
+}
+
+@keyframes likeAnim {
+    from {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}

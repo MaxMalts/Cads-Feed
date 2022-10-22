@@ -3,36 +3,48 @@
         "id": 1,
         "author": "Sofa",
         "articleId": 33,
-        "text": "Comment comment comment"
+        "text": "Comment comment comment",
+        "currentLikes": 5,
+        "date": "2000-01-01"
     },
     {
         "id": 2,
         "author": "Ivan",
         "articleId": 5,
-        "text": "Random text from Ivan"
+        "text": "Random text from Ivan",
+        "currentLikes": 55,
+        "date": "2000-02-01"
     },
     {
         "id": 3,
         "author": "Oleg",
         "articleId": 5,
-        "text": "Long text long text long text long text long text long text"
+        "text": "Long text long text long text long text long text long text",
+        "currentLikes": 555,
+        "date": "2000-01-02"
     },
     {
         "id": 4,
         "author": "Roman",
         "articleId": 33,
-        "text": "Short text"
+        "text": "Short text",
+        "currentLikes": 12345,
+        "date": "2020-01-01"
     },
     {
         "id": 5,
         "author": "Bob",
         "articleId": 16,
-        "text": "Short text from Bob"
+        "text": "Short text from Bob",
+        "currentLikes": 0,
+        "date": "2019-01-01"
     },
     {
         "id": 6,
         "author": "Roman",
         "articleId": 11,
-        "text": "Short text from Frank + random random random"
+        "text": "Short text from Frank + random random random",
+        "currentLikes": 99999,
+        "date": "2022-01-01"
     }
 ]
