@@ -4,6 +4,23 @@
     margin-top: 20px;
 }
 
+.sortsContainer {
+    width: 100%;
+    text-align: end;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+
+.sortsLabel {
+    margin: 0 0.2rem;
+    cursor: pointer;
+}
+
+.sortsRadio:checked + .sortsLabel {
+    text-decoration: underline;
+}
+
 .comment {
     margin-top: 15px;
 }
