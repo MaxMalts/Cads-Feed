@@ -1,31 +1,29 @@
 @import '../assets/styles/baseVariables.scss';
 
 .commentContainer {
-    padding: 10px;
-    border: solid black 1px;
+    padding: 4px 10px 15px 10px;
+    border: solid $borders-color 1px;
     border-radius: 10px;
-
-    display: flex;
-    justify-content: stretch;
-    align-items: center;
-    gap: 20px;
 
     background: var(--primary-color);
 
     position: relative;
 }
 
-.commentContent {
-    flex-grow: 1;
-    text-align: start;
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.separator {
-    margin: 5px 0;
+.date {
+    font-size: 0.7rem;
+    color: var(--secondary-color-dim);
 }
 
 .deleteBtn {
-    $delete-btn-size: 20px;
+    $delete-btn-size: 18px;
 
     width: $delete-btn-size;
     height: $delete-btn-size;
@@ -41,6 +39,28 @@
     width: 100%;
 }
 
+.commentContent {
+    margin-top: 7px;
+    text-align: start;
+}
+
+.author {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.separator {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.commentText {
+    width: 100%;
+    overflow-wrap: anywhere;
+}
+
 .likesContainer {
     position: absolute;
     right: 8px;
@@ -52,12 +72,12 @@
 }
 
 .likesAmt {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
 }
 
 .likeBtn {
-    width: 10px;
-    height: 10px;
+    width: 13px;
+    height: 13px;
     margin-left: 4px;
-    line-height: 0.7rem;
+    line-height: 0.85rem;
 }
