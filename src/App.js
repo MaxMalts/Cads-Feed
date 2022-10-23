@@ -5,13 +5,20 @@ import NewCard from './components/NewCard.js';
 import Popup from './components/Popup';
 import baseStyles from './assets/styles/base.module.scss';
 import styles from './App.module.scss';
-
+import {dateComparator, numComparator} from './assets/helpers/sortComparators';
+import SortBy from './common-components/SortBy';
 
 export class App extends React.Component {
+    sortTypes = [
+        'date',
+        'likes'
+    ];
+
     state = {
         loading: true,
         cards: [],
-        creatingCard: false
+        creatingCard: false,
+        chosenSortType: this.sortTypes[0]
     }
 
     constructor(props) {
@@ -19,15 +26,26 @@ export class App extends React.Component {
 
         this.onCreateCardClick = this.onCreateCardClick.bind(this);
         this.onCardCreation = this.onCardCreation.bind(this);
+        this.sortBy = this.sortBy.bind(this);
     }
 
     componentDidMount() {
         getArticles().then(cards => {
-            this.setState({
-                loading: false,
-                cards: cards
-            });
-        })
+            this.setState({loading: false, cards: cards});
+            this.sortBy(this.state.chosenSortType);
+        });
+    }
+
+    sortBy(sortType) {
+        const comparator = sortType === 'date'
+            ? (item1, item2) => dateComparator(item1.date, item2.date)
+            : (item1, item2) => numComparator(item1.currentLikes, item2.currentLikes);
+
+        this.setState(prev => ({
+                cards: [...prev.cards].sort(comparator),
+                chosenSortType: sortType
+            })
+        );
     }
 
     onCreateCardClick() {
@@ -55,6 +73,13 @@ export class App extends React.Component {
         return (
             <div className={styles.app}>
                 <main className={styles.pageContainer}>
+                    <div className={styles.sortsContainer}>
+                        <SortBy
+                            options={this.sortTypes} defaultOption={this.state.chosenSortType}
+                            onChange={this.sortBy}
+                        />
+                    </div>
+
                     {this.state.loading
                         ? 'Loading...'
                         : this.state.cards.map(item => (

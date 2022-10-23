@@ -27,6 +27,8 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
 
     return (
         <div className={styles.cardContainer}>
+            <div className={styles.date}>{cardData.date}</div>
+
             <h3 className={styles.title}>{title}</h3>
             <p className={styles.description}>{text}</p>
 

@@ -1,0 +1,22 @@
+@import '../assets/styles/baseVariables.scss';
+
+.container {
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+}
+
+.radio {
+    display: none;
+}
+
+.label {
+    cursor: pointer;
+}
+
+.labelText {
+    margin-left: 0.3rem;
+}
+
+.radio:checked + .labelText {
+    text-decoration: underline;
+}
