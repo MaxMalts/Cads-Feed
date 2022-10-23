@@ -5,23 +5,8 @@
 }
 
 .sortsContainer {
-    width: 100%;
+    margin: 0 10px;
     text-align: end;
-    font-size: 0.9rem;
-    color: var(--secondary-color);
-}
-
-.sortsRadio {
-    display: none;
-}
-
-.sortsLabel {
-    margin: 0 0.2rem;
-    cursor: pointer;
-}
-
-.sortsRadio:checked + .sortsLabel {
-    text-decoration: underline;
 }
 
 .comment {

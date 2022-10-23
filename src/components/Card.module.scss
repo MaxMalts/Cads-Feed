@@ -15,6 +15,12 @@ $action-button-size: 30px;
     text-align: center;
 }
 
+.date {
+    font-size: 0.7rem;
+    color: var(--secondary-color-dim);
+    text-align: start;
+}
+
 @mixin checkSetFontSize($fontSize) {
     @if $fontSize != 0 {
         font-size: $fontSize;
@@ -30,6 +36,8 @@ $action-button-size: 30px;
 
 .title {
     @include titleFont();
+
+    margin-top: 10px;
 }
 
 @mixin descriptionFont($fontSize: 0) {

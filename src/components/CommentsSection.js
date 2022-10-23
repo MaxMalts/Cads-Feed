@@ -4,15 +4,19 @@ import submitIcon from '../assets/icons/send.svg'
 import styles from './CommentsSection.module.scss';
 import baseStyles from '../assets/styles/base.module.scss';
 import {getComments} from '../assets/helpers/get-comments-by-article.js';
-import uuid from 'react-uuid';
+import {dateComparator, numComparator} from '../assets/helpers/sortComparators';
+import SortBy from '../common-components/SortBy.js';
 
 export default class CommentsSection extends React.Component {
-    id;
+    sortTypes = [
+        'date',
+        'likes'
+    ];
 
     state = {
         loading: true,
         comments: [],
-        chosenSortType: 'date'
+        chosenSortType: this.sortTypes[0]
     }
 
     constructor(props) {
@@ -23,59 +27,30 @@ export default class CommentsSection extends React.Component {
         this.commentForm = React.createRef();
         this.onCommentDelete = this.onCommentDelete.bind(this);
         this.onCommentSubmit = this.onCommentSubmit.bind(this);
-
-        this.id = uuid();
+        this.sortBy = this.sortBy.bind(this);
     }
 
     componentDidMount() {
         getComments(this.props.articleId).then(comments => {
-            this.setState(prev => {
-                return {
-                    loading: false,
-                    comments: [...comments]
-                }
-            });
+            this.setState({loading: false, comments: comments});
             this.sortBy(this.state.chosenSortType);
         });
     }
 
     sortBy(sortType) {
-        let comparator = null;
-        if (sortType === 'date') {
-            comparator = (item1, item2) => {
-                let date1 = Date.parse(item1.date);
-                let date2 = Date.parse(item2.date);
-                if (date1 < date2) {
-                    return 1;
-                } else if (date1 === date2) {
-                    return 0;
-                } else {
-                    return -1;
-                }
-            };
+        const comparator = sortType === 'date'
+            ? (item1, item2) => dateComparator(item1.date, item2.date)
+            : (item1, item2) => numComparator(item1.currentLikes, item2.currentLikes);
 
-        } else {
-            comparator = (item1, item2) => {
-                if (item1.currentLikes < item2.currentLikes) {
-                    return 1;
-                } else if (item1.currentLikes === item2.currentLikes) {
-                    return 0;
-                } else {
-                    return -1;
-                }
-            };
-        }
-
-        this.setState(prev => {
-            return {
+        this.setState(prev => ({
                 comments: [...prev.comments].sort(comparator),
                 chosenSortType: sortType
-            }
-        });
+            })
+        );
     }
 
     onCommentDelete(id) {
-        this.setState({comments: this.state.comments.filter(item => item.id !== id)});
+        this.setState(prev => ({comments: prev.comments.filter(item => item.id !== id)}));
         this.props.onCommentDeleted();
     }
 
@@ -116,25 +91,10 @@ export default class CommentsSection extends React.Component {
             <div className={styles.commentsContainer}>
                 <div className={styles.header}>
                     <div className={styles.sortsContainer}>
-                        <span>Sort by: </span>
-
-                        <input
-                            id={this.id + "_sort-by_date"} className={styles.sortsRadio}
-                            type="radio"  name={this.id + "_sort-by"} value="date" defaultChecked
-                            onChange={event => this.sortBy(event.target.value)}
+                        <SortBy
+                            options={this.sortTypes} defaultOption={this.state.chosenSortType}
+                            onChange={this.sortBy}
                         />
-                        <label
-                            className={styles.sortsLabel} htmlFor={this.id + "_sort-by_date"}
-                        >date</label>
-
-                        <input
-                            id={this.id + "_sort-by_likes"} className={styles.sortsRadio}
-                            type="radio" name={this.id + "_sort-by"} value="likes"
-                            onChange={event => this.sortBy(event.target.value)}
-                        />
-                        <label
-                            className={styles.sortsLabel} htmlFor={this.id + "_sort-by_likes"}
-                        >likes</label>
                     </div>
                 </div>
 
