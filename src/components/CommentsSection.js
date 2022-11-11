@@ -40,7 +40,7 @@ export default class CommentsSection extends React.Component {
 
         this.setState({
             comments: this.state.comments.concat({
-                id: this.state.comments.reduce((prev, cur) => prev > cur.id ? prev : cur.id, 0) + 1,  // max + 1
+                id: Math.max(0, ...this.state.comments.map(item => item.id)) + 1,
                 author: this.nameInput.current.value,
                 articleId: this.props.articleId,
                 text: this.commentInput.current.value

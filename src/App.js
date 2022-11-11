@@ -41,9 +41,7 @@ export class App extends React.Component {
         this.setState({
             ...this.state,
             cards: this.state.cards.concat({
-                articleId: this.state.cards.reduce(
-                    (prev, cur) => prev > cur.articleId ? prev : cur.articleId, 0
-                ) + 1,  // max + 1
+                articleId: Math.max(0, ...this.state.cards.map(item => item.articleId)) + 1,
                 title: title,
                 text: description,
                 currentLikes: 0,
