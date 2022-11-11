@@ -5,11 +5,11 @@ import likeLiked from '../assets/icons/likeLiked.svg';
 import comment from '../assets/icons/comment.svg';
 import styles from './Card.module.css';
 
-export default function Card({title, text, currentLikes, commentsCount}) {
+export default function Card({articleId, title, text, currentLikes, curCommentsCount}) {
     const [curLikes, setCurLikes] = useState(currentLikes);
     const [liked, setLiked] = useState(false);
 
-    const [commentsCount, setCommentsCount] = useState(commentsCount);
+    const [commentsCount, setCommentsCount] = useState(curCommentsCount);
     const [commentsOpened, setCommentsOpened] = useState(false);
 
     const onLikeClick = () => {
@@ -57,7 +57,7 @@ export default function Card({title, text, currentLikes, commentsCount}) {
                 <>
                     <hr className={styles.separator} />
                     <CommentsSection
-                        articleId={cardData.articleId}
+                        articleId={articleId}
                         onCommentAdded={onCommentAdded}
                         onCommentDeleted={onCommentDeleted}
                     ></CommentsSection>

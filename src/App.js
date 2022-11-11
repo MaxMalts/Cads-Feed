@@ -60,10 +60,11 @@ export class App extends React.Component {
                         : this.state.cards.map(item => (
                             <div key={item.articleId} className={styles.card}>
                                 <Card
+                                    articleId={item.articleId}
                                     title={item.title}
                                     text={item.text}
                                     currentLikes={item.currentLikes}
-                                    commentsCount={item.commentsCount}
+                                    curCommentsCount={item.commentsCount}
                                 />
                             </div>
                         ))
