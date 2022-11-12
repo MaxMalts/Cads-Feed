@@ -63,7 +63,8 @@ export class App extends React.Component {
                 title: title,
                 text: description,
                 currentLikes: 0,
-                commentsCount: 0
+                commentsCount: 0,
+                date: new Date().toISOString().split('T')[0]
             }),
             creatingCard: false
         });
@@ -91,6 +92,7 @@ export class App extends React.Component {
                                     text={item.text}
                                     currentLikes={item.currentLikes}
                                     curCommentsCount={item.commentsCount}
+                                    date={item.date}
                                 />
                             </div>
                         ))

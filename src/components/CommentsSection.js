@@ -103,7 +103,8 @@ export default class CommentsSection extends React.Component {
                     : this.state.comments.map(item => (
                         <div key={item.id} className={styles.comment}>
                             <Comment
-                                commentData={item} onDelete={() => this.onCommentDelete(item.id)}
+                                commentData={item}
+                                onDelete={() => this.onCommentDelete(item.id)}
                                 onLike={() => this.onCommentLike(item.id)}
                             ></Comment>
                         </div>

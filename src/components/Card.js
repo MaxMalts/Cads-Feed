@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-export default function Card({articleId, title, text, currentLikes, curCommentsCount}) {
+export default function Card({articleId, title, text, currentLikes, curCommentsCount, date}) {
     const [curLikes] = useState(currentLikes);
 
     const [commentsCount, setCommentsCount] = useState(curCommentsCount);
@@ -27,7 +27,7 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
 
     return (
         <div className={styles.cardContainer}>
-            <div className={styles.date}>{cardData.date}</div>
+            <div className={styles.date}>{date}</div>
 
             <h3 className={styles.title}>{title}</h3>
             <p className={styles.description}>{text}</p>
