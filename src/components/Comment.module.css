@@ -1,0 +1,34 @@
+.commentContainer {
+    padding: 7px 10px;
+    border: solid black 1px;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    gap: 20px;
+}
+
+.commentContent {
+    flex-grow: 1;
+    text-align: start;
+}
+
+.separator {
+    margin: 5px 0;
+}
+
+.deleteBtn {
+    width: 20px;
+    height: 20px;
+    padding: 3px;
+    box-sizing: border-box;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    cursor: pointer;
+}
+
+.deleteBtnImg {
+    width: 100%;
+}

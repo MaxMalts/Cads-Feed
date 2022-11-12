@@ -1,5 +1,6 @@
 .app {
     text-align: center;
+    padding: 1px;
 }
 
 .pageContainer {
@@ -10,4 +11,10 @@
 
 .card {
     margin: 20px 0;
+}
+
+.newCardBtn {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    margin-bottom: 30px;
 }

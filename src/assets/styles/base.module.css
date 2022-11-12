@@ -1,0 +1,31 @@
+:root {
+    --input-field-bg: #f7f7f7;
+}
+
+.inputField {
+    display: block;
+    padding: 7px 10px;
+    box-sizing: border-box;
+
+    border: solid #000 1px;
+    border-radius: 5px;
+    background: var(--input-field-bg);
+}
+
+.button {
+    display: inline-block;
+    padding: 5px 10px;
+    box-sizing: border-box;
+
+    border: solid #000 1px;
+    border-radius: 5px;
+    background: var(--input-field-bg);
+
+    cursor: pointer;
+
+    transition: filter 50ms;
+}
+
+.button:hover {
+    filter: brightness(0.95);
+}
