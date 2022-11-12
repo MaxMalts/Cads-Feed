@@ -1,6 +1,9 @@
+@import 'assets/styles/baseVariables';
+
 .app {
-    text-align: center;
     padding: 1px;
+    text-align: center;
+    color: var(--secondary-color);
 }
 
 .pageContainer {

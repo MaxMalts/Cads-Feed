@@ -1,4 +1,4 @@
-import styles from './Popup.module.css';
+import styles from './Popup.module.scss';
 
 export default function Popup({children}) {
     return (

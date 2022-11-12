@@ -1,16 +1,47 @@
+@import '../assets/styles/baseVariables.scss';
+
+$action-button-size: 30px;
+
+@mixin cardContainerPadding($vertical, $horizontal: $vertical) {
+    padding: $vertical $horizontal;
+}
+
 .cardContainer {
-    padding: 20px 30px;
+    @include cardContainerPadding(20px, 30px);
+
     border: 2px solid #000;
     border-radius: 20px;
 
     text-align: center;
 }
 
-.title {
+@mixin checkSetFontSize($fontSize) {
+    @if $fontSize != 0 {
+        font-size: $fontSize;
+    }
+}
+
+@mixin titleFont($fontSize: 0) {
+    @include checkSetFontSize($fontSize);
+
     font-weight: bold;
+    font-style: normal;
+}
+
+.title {
+    @include titleFont();
+}
+
+@mixin descriptionFont($fontSize: 0) {
+    @include checkSetFontSize($fontSize);
+
+    font-weight: normal;
+    font-style: normal;
 }
 
 .description {
+    @include descriptionFont();
+
     margin-top: 30px;
 }
 
@@ -27,12 +58,18 @@
 
 .likeBtn {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: $action-button-size;
+    height: $action-button-size;
     margin-left: 8px;
     vertical-align: middle;
 
     cursor: pointer;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
 }
 
 .likeBtnImg {
@@ -61,8 +98,8 @@
 
 .commentBtn {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: $action-button-size;
+    height: $action-button-size;
     vertical-align: middle;
 
     padding: 3px;
@@ -73,15 +110,15 @@
     border-radius: 5px;
     background: transparent;
     transition: background-color 200ms;
+
+    &.btnOpened {
+        background-color: var(--primary-color-soft);
+    }
 }
 
 .commentBtnImg {
     width: 100%;
     vertical-align: middle;
-}
-
-.commentBtnOpened {
-    background-color: #eee;
 }
 
 .commentsAmt {
@@ -91,5 +128,5 @@
 }
 
 .separator {
-    margin: 8px 0px;
+    margin: 8px 0;
 }

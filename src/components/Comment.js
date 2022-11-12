@@ -1,5 +1,5 @@
 import deleteIcon from '../assets/icons/delete.svg'
-import styles from './Comment.module.css';
+import styles from './Comment.module.scss';
 
 export default function Comment(props) {
     return (
