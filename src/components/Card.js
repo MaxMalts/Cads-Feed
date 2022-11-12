@@ -42,7 +42,7 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
                     <button
                         className={cx({
                             commentBtn: true,
-                            commentBtnOpened: commentsOpened
+                            btnOpened: commentsOpened
                         })}
                         onClick={onCommentClick}
                     >

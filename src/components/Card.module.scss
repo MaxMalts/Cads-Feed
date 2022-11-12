@@ -37,9 +37,6 @@ $action-button-size: 30px;
 
     font-weight: normal;
     font-style: normal;
-
-    /* Хз на самом деле, что вам нужно, но вот какие-то миксины я сделал)
-    Если нужно было что-то другое, напишите. */
 }
 
 .description {
@@ -114,7 +111,7 @@ $action-button-size: 30px;
     background: transparent;
     transition: background-color 200ms;
 
-    &.commentBtnOpened {
+    &.btnOpened {
         background-color: var(--primary-color-soft);
     }
 }
