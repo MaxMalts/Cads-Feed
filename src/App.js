@@ -75,7 +75,8 @@ export class App extends React.Component {
                 <main className={styles.pageContainer}>
                     <div className={styles.sortsContainer}>
                         <SortBy
-                            options={this.sortTypes} defaultOption={this.state.chosenSortType}
+                            options={this.sortTypes}
+                            defaultOption={this.state.chosenSortType}
                             onChange={this.sortBy}
                         />
                     </div>
