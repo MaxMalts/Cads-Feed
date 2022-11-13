@@ -91,6 +91,7 @@ class CardsFeed extends React.Component {
                             <div key={item.articleId} className={styles.card}>
                                 <Card
                                     articleId={item.articleId}
+                                    synaptic={true}
                                 />
                             </div>
                         ))
