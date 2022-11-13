@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {Routes, Route} from 'react-router-dom'
 import rootReducer from './store/reducers/rootReducer';
 import HomePage from './pages/HomePage.js';
-import CardsFeed from './components/CardsFeed.js';
+import CardsFeed from './pages/CardsFeed.js';
 import CardPage from './pages/CardPage.js';
 import styles from './App.module.scss';
 

@@ -12,13 +12,15 @@ const mapStateToProps = (state, {articleId}) => ({
     cardData: state.cards.find(item => item.articleId === articleId),
 });
 
-function Card({articleId, cardData}) {
+function Card({articleId, synaptic, cardData}) {
     const [curLikes] = useState(cardData.currentLikes);
 
     const [commentsOpened, setCommentsOpened] = useState(false);
 
     const onCommentClick = () => {
-        setCommentsOpened(!commentsOpened);
+        if (!synaptic) {
+            setCommentsOpened(!commentsOpened);
+        }
     }
 
     return (
@@ -29,7 +31,13 @@ function Card({articleId, cardData}) {
             <p className={styles.description}>{cardData.text}</p>
 
             <div className={styles.footer}>
-                <button className={styles.commentsContainer} onClick={onCommentClick}>
+                <button
+                    className={cx({
+                        commentsContainer: true,
+                        active: !synaptic
+                    })}
+                    {...{onClick: synaptic ? undefined : onCommentClick}}
+                >
                     <div className={cx({
                             commentBtn: true,
                             btnOpened: commentsOpened
