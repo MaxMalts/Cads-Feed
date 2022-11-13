@@ -2,7 +2,7 @@ import deleteIcon from '../assets/icons/delete.svg'
 import styles from './Comment.module.scss';
 import Like from '../common-components/Like';
 
-export default function Comment({commentData, onLike, onDelete}) {
+export default function Comment({commentData, onDelete}) {
     return (
         <div className={styles.commentContainer}>
             <div className={styles.header}>

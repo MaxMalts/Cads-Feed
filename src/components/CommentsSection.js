@@ -1,13 +1,34 @@
 import React from 'react';
-import Comment from './Comment.js';
-import submitIcon from '../assets/icons/send.svg'
-import styles from './CommentsSection.module.scss';
-import baseStyles from '../assets/styles/base.module.scss';
+
+import {connect} from 'react-redux';
+import {
+    actionAddComment,
+    actionDeleteComment,
+    actionLoadCardComments
+} from '../store/actions/commentsActions.js';
+
 import {getComments} from '../assets/helpers/get-comments-by-article.js';
 import {dateComparator, numComparator} from '../assets/helpers/sortComparators';
+
+import Comment from './Comment.js';
 import SortBy from '../common-components/SortBy.js';
 
-export default class CommentsSection extends React.Component {
+import submitIcon from '../assets/icons/send.svg';
+
+import baseStyles from '../assets/styles/base.module.scss';
+import styles from './CommentsSection.module.scss';
+
+const mapStateToProps = (state, {articleId}) => ({
+    comments: state.cards.find(item => item.articleId === articleId).comments
+});
+
+const mapDispatchToProps = (dispatch, {articleId}) => ({
+    loadComments: comments => dispatch(actionLoadCardComments(articleId, comments)),
+    addComment: (author, text) => dispatch(actionAddComment(articleId, author, text)),
+    deleteComment: id => dispatch(actionDeleteComment(articleId, id))
+});
+
+class CommentsSection extends React.Component {
     sortTypes = [
         'date',
         'likes'
@@ -15,7 +36,6 @@ export default class CommentsSection extends React.Component {
 
     state = {
         loading: true,
-        comments: [],
         chosenSortType: this.sortTypes[0]
     }
 
@@ -27,85 +47,59 @@ export default class CommentsSection extends React.Component {
         this.commentForm = React.createRef();
         this.onCommentDelete = this.onCommentDelete.bind(this);
         this.onCommentSubmit = this.onCommentSubmit.bind(this);
-        this.sortBy = this.sortBy.bind(this);
+        this.setSortType = this.setSortType.bind(this);
     }
 
     componentDidMount() {
         getComments(this.props.articleId).then(comments => {
-            this.setState({loading: false, comments: comments});
-            this.sortBy(this.state.chosenSortType);
+            this.props.loadComments(comments);
+            this.setState({loading: false});
         });
     }
 
-    sortBy(sortType) {
-        const comparator = sortType === 'date'
+    setSortType(sortType) {
+        this.setState({chosenSortType: sortType});
+    }
+
+    getSortedComments() {
+        const comparator = this.state.chosenSortType === 'date'
             ? (item1, item2) => dateComparator(item1.date, item2.date)
             : (item1, item2) => numComparator(item1.currentLikes, item2.currentLikes);
 
-        this.setState(prev => ({
-                comments: [...prev.comments].sort(comparator),
-                chosenSortType: sortType
-            })
-        );
+        return [...this.props.comments].sort(comparator);
     }
 
     onCommentDelete(id) {
-        this.setState(prev => ({comments: prev.comments.filter(item => item.id !== id)}));
-        this.props.onCommentDeleted();
-    }
-
-    onCommentLike(id) {
-        let newComments = this.state.comments.map(item => {
-            if (item.id === id) {
-                return {
-                    currentLikes: item.currentLikes + 1
-                };
-            } else {
-                return item;
-            }
-        })
-        
-        this.setState({comments: newComments});
+        this.props.deleteComment(id);
     }
 
     onCommentSubmit(event) {
         event.preventDefault();
-
-        this.setState({
-            comments: this.state.comments.concat({
-                id: Math.max(0, ...this.state.comments.map(item => item.id)) + 1,
-                author: this.nameInput.current.value,
-                articleId: this.props.articleId,
-                text: this.commentInput.current.value,
-                currentLikes: 0,
-                date: new Date().toISOString().split('T')[0]
-            })
-        });
-
+        this.props.addComment(this.nameInput.current.value, this.commentInput.current.value);
         this.commentForm.current.reset();
-        this.props.onCommentAdded();
     }
 
     render() {
+        const sortedComments = this.getSortedComments();
+
         return (
             <div className={styles.commentsContainer}>
                 <div className={styles.header}>
                     <div className={styles.sortsContainer}>
                         <SortBy
                             options={this.sortTypes} defaultOption={this.state.chosenSortType}
-                            onChange={this.sortBy}
+                            onChange={this.setSortType}
                         />
                     </div>
                 </div>
 
                 {this.state.loading
                     ? 'Loading...'
-                    : this.state.comments.map(item => (
+                    : sortedComments.map(item => (
                         <div key={item.id} className={styles.comment}>
                             <Comment
                                 commentData={item}
                                 onDelete={() => this.onCommentDelete(item.id)}
-                                onLike={() => this.onCommentLike(item.id)}
                             ></Comment>
                         </div>
                     ))
@@ -137,3 +131,5 @@ export default class CommentsSection extends React.Component {
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentsSection);
