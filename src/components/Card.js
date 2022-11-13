@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {connect} from 'react-redux';
 import Like from '../common-components/Like';
 import CommentsSection from './CommentsSection.js';
 import comment from '../assets/icons/comment.svg';
@@ -7,10 +8,13 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-export default function Card({articleId, title, text, currentLikes, curCommentsCount, date}) {
-    const [curLikes] = useState(currentLikes);
+const mapStateToProps = (state, {articleId}) => ({
+    cardData: state.cards.find(item => item.articleId === articleId),
+});
 
-    const [commentsCount/*, setCommentsCount*/] = useState(curCommentsCount);
+function Card({articleId, cardData}) {
+    const [curLikes] = useState(cardData.currentLikes);
+
     const [commentsOpened, setCommentsOpened] = useState(false);
 
     const onCommentClick = () => {
@@ -19,10 +23,10 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
 
     return (
         <div className={styles.cardContainer}>
-            <div className={styles.date}>{date}</div>
+            <div className={styles.date}>{cardData.date}</div>
 
-            <h3 className={styles.title}>{title}</h3>
-            <p className={styles.description}>{text}</p>
+            <h3 className={styles.title}>{cardData.title}</h3>
+            <p className={styles.description}>{cardData.text}</p>
 
             <div className={styles.footer}>
                 <button className={styles.commentsContainer} onClick={onCommentClick}>
@@ -32,7 +36,7 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
                         })}>
                         <img className={styles.commentBtnImg} src={comment} alt=''/>
                     </div>
-                    <span className={styles.commentsAmt}>{commentsCount}</span>
+                    <span className={styles.commentsAmt}>{cardData.commentsCount}</span>
                 </button>
 
                 <Like curLikes={curLikes} counterStyle={styles.likesAmt} likeStyle={styles.likeBtn} />
@@ -49,3 +53,5 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
         </div>
     );
 }
+
+export default connect(mapStateToProps)(Card);

@@ -91,11 +91,6 @@ class CardsFeed extends React.Component {
                             <div key={item.articleId} className={styles.card}>
                                 <Card
                                     articleId={item.articleId}
-                                    title={item.title}
-                                    text={item.text}
-                                    currentLikes={item.currentLikes}
-                                    curCommentsCount={item.commentsCount}
-                                    date={item.date}
                                 />
                             </div>
                         ))
