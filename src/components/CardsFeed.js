@@ -1,5 +1,7 @@
 import React from 'react';
+
 import {connect} from 'react-redux';
+import {actionAddCard, actionLoadCards} from '../store/actions/cardsActions.js';
 
 import {getArticles} from '../assets/helpers/get-articles.js';
 import {dateComparator, numComparator} from '../assets/helpers/sortComparators.js';
@@ -16,6 +18,11 @@ const mapStateToProps = state => ({
     cards: state.cards
 });
 
+const mapDispatchToProps = dispatch => ({
+    loadCards: cards => dispatch(actionLoadCards(cards)),
+    addCard: (title, description) => dispatch(actionAddCard(title, description))
+})
+
 class CardsFeed extends React.Component {
     sortTypes = [
         'date',
@@ -24,7 +31,6 @@ class CardsFeed extends React.Component {
 
     state = {
         loading: true,
-        cards: [],
         creatingCard: false,
         chosenSortType: this.sortTypes[0]
     }
@@ -34,51 +40,41 @@ class CardsFeed extends React.Component {
 
         this.onCreateCardClick = this.onCreateCardClick.bind(this);
         this.onCardCreation = this.onCardCreation.bind(this);
-        this.sortBy = this.sortBy.bind(this);
+        this.setSortType = this.setSortType.bind(this);
     }
 
     componentDidMount() {
         getArticles().then(cards => {
-            this.setState({loading: false, cards: cards});
-            this.sortBy(this.state.chosenSortType);
+            this.props.loadCards(cards);
+            this.setState({loading: false});
         });
     }
 
-    sortBy(sortType) {
-        const comparator = sortType === 'date'
+    setSortType(sortType) {
+        this.setState({chosenSortType: sortType});
+    }
+
+    getSortedCards() {
+        const comparator = this.state.chosenSortType === 'date'
             ? (item1, item2) => dateComparator(item1.date, item2.date)
             : (item1, item2) => numComparator(item1.currentLikes, item2.currentLikes);
 
-        this.setState(prev => ({
-                cards: [...prev.cards].sort(comparator),
-                chosenSortType: sortType
-            })
-        );
+        console.log(this.props.cards);
+        return [...this.props.cards].sort(comparator);
     }
 
     onCreateCardClick() {
-        this.setState({
-            ...this.state,
-            creatingCard: true
-        });
+        this.setState({creatingCard: true});
     }
 
     onCardCreation(title, description) {
-        this.setState({
-            ...this.state,
-            cards: this.state.cards.concat({
-                articleId: Math.max(0, ...this.state.cards.map(item => item.articleId)) + 1,
-                title: title,
-                text: description,
-                currentLikes: 0,
-                commentsCount: 0,
-                date: new Date().toISOString().split('T')[0]
-            }),
-            creatingCard: false
-        });
+        this.props.addCard(title, description);
+        this.setState({creatingCard: false});
     }
 
     render() {
+        const sortedCards = this.getSortedCards();
+
         return (
             <>
                 <main className={styles.feedContainer}>
@@ -86,13 +82,13 @@ class CardsFeed extends React.Component {
                         <SortBy
                             options={this.sortTypes}
                             defaultOption={this.state.chosenSortType}
-                            onChange={this.sortBy}
+                            onChange={this.setSortType}
                         />
                     </div>
 
                     {this.state.loading
                         ? 'Loading...'
-                        : this.state.cards.map(item => (
+                        : sortedCards.map(item => (
                             <div key={item.articleId} className={styles.card}>
                                 <Card
                                     articleId={item.articleId}
@@ -121,4 +117,4 @@ class CardsFeed extends React.Component {
     }
 }
 
-export default connect(mapStateToProps)(CardsFeed);
+export default connect(mapStateToProps, mapDispatchToProps)(CardsFeed);
