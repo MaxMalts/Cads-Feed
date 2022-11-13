@@ -17,7 +17,9 @@ function Card({articleId, synaptic, cardData}) {
 
     const [commentsOpened, setCommentsOpened] = useState(false);
 
-    const onCommentClick = () => {
+    const onCommentClick = event => {
+        event.preventDefault();
+        
         if (!synaptic) {
             setCommentsOpened(!commentsOpened);
         }

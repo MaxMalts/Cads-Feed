@@ -9,7 +9,8 @@ const cx = classNames.bind(styles);
 export default function Like({curLikes, counterStyle, likeStyle}) {
     const [liked, setLiked] = useState(false);
 
-    const onLikeClick = () => {
+    const onLikeClick = event => {
+        event.preventDefault();
         setLiked(!liked);
     }
 

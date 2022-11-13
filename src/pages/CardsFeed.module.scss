@@ -1,20 +1,30 @@
 .feedContainer {
-  width: 50%;
-  max-width: 400px;
-  margin: auto;
+    width: 50%;
+    max-width: 400px;
+    margin: auto;
 }
 
 .sortsContainer {
-  margin: 10px 15px 15px 0;
-  text-align: end;
+    margin: 10px 15px 15px 0;
+    text-align: end;
+}
+
+.cardLink {
+    all: unset;
+    --webkit-appearance: none;
+       --moz-appearance: none;
+        --ms-appearance: none;
+         --o-appearance: none;
+
+    cursor: pointer;
 }
 
 .card {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
 .newCardBtn {
-  font-size: 1.2rem;
-  margin-top: 10px;
-  margin-bottom: 30px;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    margin-bottom: 30px;
 }

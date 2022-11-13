@@ -73,6 +73,7 @@ $action-button-size: 30px;
 
 .commentsContainer {
     white-space: nowrap;
+    cursor: unset;
 
     &.active {
         cursor: pointer;
