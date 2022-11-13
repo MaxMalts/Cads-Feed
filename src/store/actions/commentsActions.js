@@ -19,7 +19,8 @@ export const actionAddComment = (cardId, author, text) => ({
     payload: {
         cardId,
         author,
-        text
+        text,
+        date: new Date().toISOString().split('T')[0]
     }
 });
 

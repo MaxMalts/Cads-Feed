@@ -11,7 +11,8 @@ export const actionAddCard = (title, description) => ({
     type: actionTypes.addCard,
     payload: {
         title,
-        description
+        description,
+        date: new Date().toISOString().split('T')[0]
     }
 });
 
