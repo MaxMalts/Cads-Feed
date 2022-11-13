@@ -7,6 +7,8 @@ import {actionLoadCards} from '../store/actions/cardsActions';
 import Card from '../components/Card';
 import {getArticles} from '../assets/helpers/get-articles';
 
+import styles from './CardPage.module.scss';
+
 const mapStateToProps = state => ({
     cards: state.cards
 });
@@ -29,7 +31,7 @@ function CardPage({loadCards}) {
     }, []);
 
     return (
-        <main>
+        <main className={styles.cardContainer}>
             {loading
                 ? 'Loading...'
                 : <Card articleId={articleId} synaptic={false}/>
