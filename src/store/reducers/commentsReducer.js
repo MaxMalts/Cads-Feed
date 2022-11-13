@@ -31,7 +31,7 @@ const commentsReducer = (state = initialState(), action) => {
                 ...state,
                 cards: state.cards.map(item => (
                     item.articleId === action.payload.articleId
-                        ? {...item, comments: newComments}
+                        ? {...item, commentsCount: item.commentsCount + 1, comments: newComments}
                         : item
                 )),
             };
@@ -42,7 +42,11 @@ const commentsReducer = (state = initialState(), action) => {
                 ...state,
                 cards: state.cards.map(card => (
                     card.articleId === action.payload.articleId
-                        ? {...card, comments: card.comments.filter(item => item.id !== action.payload.id)}
+                        ? {
+                            ...card,
+                            commentsCount: card.commentsCount - 1,
+                            comments: card.comments.filter(item => item.id !== action.payload.id)
+                        }
                         : card
                 ))
             }
