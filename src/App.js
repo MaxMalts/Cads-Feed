@@ -1,4 +1,7 @@
 import React from 'react';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import rootReducer from './store/reducers/rootReducer';
 import {getArticles} from './assets/helpers/get-articles';
 import Card from './components/Card.js';
 import NewCard from './components/NewCard.js';
@@ -7,6 +10,8 @@ import baseStyles from './assets/styles/base.module.scss';
 import styles from './App.module.scss';
 import {dateComparator, numComparator} from './assets/helpers/sortComparators';
 import SortBy from './common-components/SortBy';
+
+const store = createStore(rootReducer);
 
 export class App extends React.Component {
     sortTypes = [
@@ -72,43 +77,45 @@ export class App extends React.Component {
 
     render() {
         return (
-            <div className={styles.app}>
-                <main className={styles.pageContainer}>
-                    <div className={styles.sortsContainer}>
-                        <SortBy
-                            options={this.sortTypes}
-                            defaultOption={this.state.chosenSortType}
-                            onChange={this.sortBy}
-                        />
-                    </div>
+            <Provider store={store}>
+                <div className={styles.app}>
+                    <main className={styles.pageContainer}>
+                        <div className={styles.sortsContainer}>
+                            <SortBy
+                                options={this.sortTypes}
+                                defaultOption={this.state.chosenSortType}
+                                onChange={this.sortBy}
+                            />
+                        </div>
 
-                    {this.state.loading
-                        ? 'Loading...'
-                        : this.state.cards.map(item => (
-                            <div key={item.articleId} className={styles.card}>
-                                <Card
-                                    articleId={item.articleId}
-                                    title={item.title}
-                                    text={item.text}
-                                    currentLikes={item.currentLikes}
-                                    curCommentsCount={item.commentsCount}
-                                    date={item.date}
-                                />
-                            </div>
-                        ))
+                        {this.state.loading
+                            ? 'Loading...'
+                            : this.state.cards.map(item => (
+                                <div key={item.articleId} className={styles.card}>
+                                    <Card
+                                        articleId={item.articleId}
+                                        title={item.title}
+                                        text={item.text}
+                                        currentLikes={item.currentLikes}
+                                        curCommentsCount={item.commentsCount}
+                                        date={item.date}
+                                    />
+                                </div>
+                            ))
+                        }
+                    </main>
+
+                    <button className={baseStyles.button + ' ' + styles.newCardBtn} onClick={this.onCreateCardClick}>
+                        Add new card
+                    </button>
+
+                    {this.state.creatingCard &&
+                        <Popup>
+                            <NewCard onCreated={this.onCardCreation}></NewCard>
+                        </Popup>
                     }
-                </main>
-
-                <button className={baseStyles.button + ' ' + styles.newCardBtn} onClick={this.onCreateCardClick}>
-                    Add new card
-                </button>
-
-                {this.state.creatingCard &&
-                    <Popup>
-                        <NewCard onCreated={this.onCardCreation}></NewCard>
-                    </Popup>
-                }
-            </div>
+                </div>
+            </Provider>
         );
     }
 }
