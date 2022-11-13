@@ -5,6 +5,7 @@ $borders-color: #000;
   --primary-color-soft: #f7f7f7;
   --secondary-color: #444;
   --secondary-color-dim: #777;
+  --link-color: #00e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,5 +14,6 @@ $borders-color: #000;
     --primary-color-soft: #555;
     --secondary-color: #fff;
     --secondary-color-dim: #999;
+    --link-color: #e80;
   }
 }
