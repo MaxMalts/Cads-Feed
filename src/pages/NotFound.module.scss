@@ -5,19 +5,28 @@
     text-align: center;
 }
 
-.text {
+.title {
     display: block;
 
     font-family: 'serif';
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: bold;
 }
 
-.cardsLink {
+.additionalText {
     display: block;
 
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+
+    font-family: 'serif';
     font-size: 1.5rem;
+}
+
+.homeLink {
+    display: block;
+
+    margin-top: 1rem;
+    font-size: 1.2rem;
 
     text-decoration: none;
 }
