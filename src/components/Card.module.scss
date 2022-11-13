@@ -51,6 +51,12 @@ $action-button-size: 30px;
     @include descriptionFont();
 
     margin-top: 30px;
+
+    &.synaptic {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }
 
 

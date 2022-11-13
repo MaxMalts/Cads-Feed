@@ -30,7 +30,12 @@ function Card({articleId, synaptic, cardData}) {
             <div className={styles.date}>{cardData.date}</div>
 
             <h3 className={styles.title}>{cardData.title}</h3>
-            <p className={styles.description}>{cardData.text}</p>
+            <p className={cx({
+                description: true,
+                synaptic: synaptic
+            })}>
+                {cardData.text}
+            </p>
 
             <div className={styles.footer}>
                 <button
