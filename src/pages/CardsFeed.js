@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
 import {actionAddCard, actionLoadCards} from '../store/actions/cardsActions.js';
@@ -89,10 +90,12 @@ class CardsFeed extends React.Component {
                         ? 'Loading...'
                         : sortedCards.map(item => (
                             <div key={item.articleId} className={styles.card}>
-                                <Card
-                                    articleId={item.articleId}
-                                    synaptic={true}
-                                />
+                                <Link className={styles.cardLink} to={`${item.articleId}`}>
+                                    <Card
+                                        articleId={item.articleId}
+                                        synaptic={true}
+                                    />
+                                </Link>
                             </div>
                         ))
                     }
