@@ -1,4 +1,4 @@
-import initialState from '../initialState';
+import initialState from '../initialState.js';
 import * as actionTypes from '../actionTypes.js';
 
 const cardsReducer = (state = initialState(), action) => {
@@ -6,16 +6,10 @@ const cardsReducer = (state = initialState(), action) => {
         case actionTypes.loadCards: {
             return {
                 ...state,
-                cards: action.payload.cards
-            };
-        }
-        case actionTypes.likeCard: {
-            return {
-                ...state,
-                cards: state.cards.map(item => (
-                    item.articleId === action.payload.id
-                        ? {...item, currentLikes: item.currentLikes + 1}
-                        : {...item}
+                cards: action.payload.cards.map(item => (
+                    item.comments === undefined
+                        ? {...item, comments: []}
+                        : item
                 ))
             };
         }
@@ -28,7 +22,8 @@ const cardsReducer = (state = initialState(), action) => {
                     text: action.payload.description,
                     currentLikes: 0,
                     commentsCount: 0,
-                    date: action.payload.date
+                    date: action.payload.date,
+                    comments: []
                 }),
             };
         }

@@ -10,19 +10,11 @@ const cx = classNames.bind(styles);
 export default function Card({articleId, title, text, currentLikes, curCommentsCount, date}) {
     const [curLikes] = useState(currentLikes);
 
-    const [commentsCount, setCommentsCount] = useState(curCommentsCount);
+    const [commentsCount/*, setCommentsCount*/] = useState(curCommentsCount);
     const [commentsOpened, setCommentsOpened] = useState(false);
 
     const onCommentClick = () => {
         setCommentsOpened(!commentsOpened);
-    }
-
-    const onCommentAdded = () => {
-        setCommentsCount(commentsCount + 1);
-    }
-
-    const onCommentDeleted = () => {
-        setCommentsCount(commentsCount - 1);
     }
 
     return (
@@ -51,8 +43,6 @@ export default function Card({articleId, title, text, currentLikes, curCommentsC
                     <hr className={styles.separator}/>
                     <CommentsSection
                         articleId={articleId}
-                        onCommentAdded={onCommentAdded}
-                        onCommentDeleted={onCommentDeleted}
                     ></CommentsSection>
                 </>
             )}

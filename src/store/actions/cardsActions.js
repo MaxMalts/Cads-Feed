@@ -15,10 +15,3 @@ export const actionAddCard = (title, description) => ({
         date: new Date().toISOString().split('T')[0]
     }
 });
-
-export const actionLikeCard = id => ({
-    type: actionTypes.likeCard,
-    payload: {
-        id
-    }
-});

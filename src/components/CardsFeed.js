@@ -59,7 +59,6 @@ class CardsFeed extends React.Component {
             ? (item1, item2) => dateComparator(item1.date, item2.date)
             : (item1, item2) => numComparator(item1.currentLikes, item2.currentLikes);
 
-        console.log(this.props.cards);
         return [...this.props.cards].sort(comparator);
     }
 
