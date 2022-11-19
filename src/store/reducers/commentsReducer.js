@@ -1,5 +1,6 @@
 import initialState from '../initialState.js';
 import * as actionTypes from '../actionTypes.js';
+import getNewId from '../../assets/helpers/getNewId';
 
 const commentsReducer = (state = initialState(), action) => {
     switch (action.type) {
@@ -19,7 +20,7 @@ const commentsReducer = (state = initialState(), action) => {
             const newComments = [
                 ...curComments,
                 {
-                    id: Math.max(0, ...curComments.map(item => item.id)) + 1,
+                    id: getNewId(curComments, item => item.id),
                     author: action.payload.author,
                     articleId: action.payload.articleId,
                     text: action.payload.text,

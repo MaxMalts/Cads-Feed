@@ -1,4 +1,5 @@
 import * as actionTypes from '../actionTypes.js';
+import getCurDate from '../../assets/helpers/getCurDate.js';
 
 export const actionLoadCardComments = (articleId, comments) => ({
    type: actionTypes.loadCardComments,
@@ -14,7 +15,7 @@ export const actionAddComment = (articleId, author, text) => ({
         articleId,
         author,
         text,
-        date: new Date().toISOString().split('T')[0]
+        date: getCurDate()
     }
 });
 

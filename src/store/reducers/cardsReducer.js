@@ -1,5 +1,6 @@
 import initialState from '../initialState.js';
 import * as actionTypes from '../actionTypes.js';
+import getNewId from '../../assets/helpers/getNewId';
 
 const cardsReducer = (state = initialState(), action) => {
     switch (action.type) {
@@ -17,7 +18,7 @@ const cardsReducer = (state = initialState(), action) => {
             return {
                 ...state,
                 cards: state.cards.concat({
-                    articleId: Math.max(0, ...state.cards.map(item => item.articleId)) + 1,
+                    articleId: getNewId(state.cards, item => item.articleId),
                     title: action.payload.title,
                     text: action.payload.description,
                     currentLikes: 0,
