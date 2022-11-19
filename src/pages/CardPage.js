@@ -5,40 +5,45 @@ import {connect} from 'react-redux';
 import {actionLoadCards} from '../store/actions/cardsActions';
 
 import Card from '../components/Card';
+import NotFound from './NotFound.js';
 import {getArticles} from '../assets/helpers/get-articles';
 
 import styles from './CardPage.module.scss';
 
-const mapStateToProps = state => ({
-    cards: state.cards
-});
-
 const mapDispatchToProps = dispatch => ({
     loadCards: cards => dispatch(actionLoadCards(cards))
-})
+});
 
 function CardPage({loadCards}) {
     const articleId = parseInt(useParams().articleId);
 
+    let [notFound, setNotFound] = useState(false);
     let [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (Number.isNaN(articleId)) {
+            setNotFound(true);
+        }
+
         getArticles().then(cards => {
-            console.log("loaded");
             loadCards(cards);
+            if (!cards.some(item => item.articleId === articleId)) {
+                setNotFound(true);
+            }
             setLoading(false);
         });
     }, []);
 
-    return (
-        <main className={styles.cardContainer}>
-            {loading
-                ? 'Loading...'
-                : <Card articleId={articleId} synaptic={false}/>
-            }
-        </main>
-
-    )
+    return notFound
+        ? <NotFound/>
+        : (
+            <main className={styles.cardContainer}>
+                {loading
+                    ? 'Loading...'
+                    : <Card articleId={articleId} synaptic={false}/>
+                }
+            </main>
+        );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardPage);
+export default connect(null, mapDispatchToProps)(CardPage);
