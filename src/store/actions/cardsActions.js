@@ -1,4 +1,5 @@
 import * as actionTypes from '../actionTypes.js';
+import getCurDate from '../../assets/helpers/getCurDate.js';
 
 export const actionLoadCards = cards => ({
     type: actionTypes.loadCards,
@@ -12,6 +13,6 @@ export const actionAddCard = (title, description) => ({
     payload: {
         title,
         description,
-        date: new Date().toISOString().split('T')[0]
+        date: getCurDate()
     }
 });
