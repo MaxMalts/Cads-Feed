@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useReducer, useRef, useState} from 'react';
 
 import {connect} from 'react-redux';
 import {
@@ -28,6 +28,37 @@ const mapDispatchToProps = (dispatch, {articleId}) => ({
     deleteComment: id => dispatch(actionDeleteComment(articleId, id))
 });
 
+const actionSetNameField = 'SET_NAME_FIELD';
+const actionSetCommentField = 'SET_COMMENT_FIELD';
+const actionClearFields = 'CLEAR_FIELDS';
+
+function commentFieldsReducer(state, action) {
+    switch(action.type) {
+        case actionSetNameField: {
+            return {
+                ...state,
+                name: action.payload.name
+            };
+        }
+        case actionSetCommentField: {
+            return {
+                ...state,
+                comment: action.payload.comment
+            };
+        }
+        case actionClearFields: {
+            return {
+                ...state,
+                name: '',
+                comment: '',
+            };
+        }
+        default: {
+            return state;
+        }
+    }
+}
+
 const sortTypes = [
     'date',
     'likes'
@@ -37,8 +68,6 @@ function CommentsSection({articleId, comments, loadComments, addComment, deleteC
     const [loading, setLoading] = useState(true);
     const [chosenSortType, setChosenSortType] = useState(sortTypes[0]);
 
-    const nameInput = useRef(null);
-    const commentInput = useRef(null);
     const commentForm = useRef(null);
 
     useEffect(() => {
@@ -47,6 +76,11 @@ function CommentsSection({articleId, comments, loadComments, addComment, deleteC
             setLoading(false);
         });
     }, [articleId, loadComments]);
+
+    const [commentFields, commentFieldsDispatch] = useReducer(
+        commentFieldsReducer,
+        {name: '', comment: ''}
+    );
 
     const getSortedComments = () => {
         const comparator = chosenSortType === 'date'
@@ -58,8 +92,9 @@ function CommentsSection({articleId, comments, loadComments, addComment, deleteC
 
     const onCommentSubmit = event => {
         event.preventDefault();
-        addComment(nameInput.current.value, commentInput.current.value);
+        addComment(commentFields.name, commentFields.comment);
         commentForm.current.reset();
+        commentFieldsDispatch({type: actionClearFields});
     };
 
     const sortedComments = getSortedComments();
@@ -93,16 +128,29 @@ function CommentsSection({articleId, comments, loadComments, addComment, deleteC
             >
                 <input
                     className={baseStyles.inputField + ' ' + styles.nameInput}
-                    ref={nameInput} type="text"
+                    type="text"
                     name="name"
-                    placeholder="Enter your name" maxLength="50" required
+                    placeholder="Enter your name"
+                    maxLength="50"
+                    required
+                    onChange={event => commentFieldsDispatch({
+                        type: actionSetNameField,
+                        payload: {
+                            name: event.target.value
+                        }
+                    })}
                 />
                 <textarea
                     className={baseStyles.inputField + ' ' + styles.commentInput}
-                    ref={commentInput}
                     name="comment"
                     placeholder="Enter your comment"
                     required
+                    onChange={event => commentFieldsDispatch({
+                        type: actionSetCommentField,
+                        payload: {
+                            comment: event.target.value
+                        }
+                    })}
                 />
                 <button className={baseStyles.button + ' ' + styles.submitBtn} type='submit'>
                     <span className={styles.submitBtnText}>Comment</span>
