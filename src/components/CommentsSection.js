@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import {connect} from 'react-redux';
 import {
@@ -28,108 +28,89 @@ const mapDispatchToProps = (dispatch, {articleId}) => ({
     deleteComment: id => dispatch(actionDeleteComment(articleId, id))
 });
 
-class CommentsSection extends React.Component {
-    sortTypes = [
-        'date',
-        'likes'
-    ];
+const sortTypes = [
+    'date',
+    'likes'
+];
 
-    state = {
-        loading: true,
-        chosenSortType: this.sortTypes[0]
-    }
+function CommentsSection({articleId, comments, loadComments, addComment, deleteComment}) {
+    const [loading, setLoading] = useState(true);
+    const [chosenSortType, setChosenSortType] = useState(sortTypes[0]);
 
-    constructor(props) {
-        super(props);
+    const nameInput = useRef(null);
+    const commentInput = useRef(null);
+    const commentForm = useRef(null);
 
-        this.nameInput = React.createRef();
-        this.commentInput = React.createRef();
-        this.commentForm = React.createRef();
-        this.onCommentDelete = this.onCommentDelete.bind(this);
-        this.onCommentSubmit = this.onCommentSubmit.bind(this);
-        this.setSortType = this.setSortType.bind(this);
-    }
-
-    componentDidMount() {
-        getComments(this.props.articleId).then(comments => {
-            this.props.loadComments(comments);
-            this.setState({loading: false});
+    useEffect(() => {
+        getComments(articleId).then(comments => {
+            loadComments(comments);
+            setLoading(false);
         });
-    }
+    }, [articleId, loadComments]);
 
-    setSortType(sortType) {
-        this.setState({chosenSortType: sortType});
-    }
-
-    getSortedComments() {
-        const comparator = this.state.chosenSortType === 'date'
+    const getSortedComments = () => {
+        const comparator = chosenSortType === 'date'
             ? (item1, item2) => dateComparator(item1.date, item2.date)
             : (item1, item2) => numComparator(item1.currentLikes, item2.currentLikes);
 
-        return [...this.props.comments].sort(comparator);
-    }
+        return [...comments].sort(comparator);
+    };
 
-    onCommentDelete(id) {
-        this.props.deleteComment(id);
-    }
-
-    onCommentSubmit(event) {
+    const onCommentSubmit = event => {
         event.preventDefault();
-        this.props.addComment(this.nameInput.current.value, this.commentInput.current.value);
-        this.commentForm.current.reset();
-    }
+        addComment(nameInput.current.value, commentInput.current.value);
+        commentForm.current.reset();
+    };
 
-    render() {
-        const sortedComments = this.getSortedComments();
+    const sortedComments = getSortedComments();
 
-        return (
-            <div className={styles.commentsContainer}>
-                <div className={styles.header}>
-                    <div className={styles.sortsContainer}>
-                        <SortBy
-                            options={this.sortTypes} defaultOption={this.state.chosenSortType}
-                            onChange={this.setSortType}
-                        />
-                    </div>
+    return (
+        <div className={styles.commentsContainer}>
+            <div className={styles.header}>
+                <div className={styles.sortsContainer}>
+                    <SortBy
+                        options={sortTypes} defaultOption={chosenSortType}
+                        onChange={setChosenSortType}
+                    />
                 </div>
-
-                {this.state.loading
-                    ? 'Loading...'
-                    : sortedComments.map(item => (
-                        <div key={item.id} className={styles.comment}>
-                            <Comment
-                                commentData={item}
-                                onDelete={() => this.onCommentDelete(item.id)}
-                            ></Comment>
-                        </div>
-                    ))
-                }
-
-                <form
-                    className={styles.commentForm} ref={this.commentForm} name='newComment'
-                    onSubmit={this.onCommentSubmit}
-                >
-                    <input
-                        className={baseStyles.inputField + ' ' + styles.nameInput}
-                        ref={this.nameInput} type="text"
-                        name="name"
-                        placeholder="Enter your name" maxLength="50" required
-                    />
-                    <textarea
-                        className={baseStyles.inputField + ' ' + styles.commentInput}
-                        ref={this.commentInput}
-                        name="comment"
-                        placeholder="Enter your comment"
-                        required
-                    />
-                    <button className={baseStyles.button + ' ' + styles.submitBtn} type='submit'>
-                        <span className={styles.submitBtnText}>Comment</span>
-                        <img className={styles.submitBtnImg} src={submitIcon} alt='send'/>
-                    </button>
-                </form>
             </div>
-        );
-    }
+
+            {loading
+                ? 'Loading...'
+                : sortedComments.map(item => (
+                    <div key={item.id} className={styles.comment}>
+                        <Comment
+                            commentData={item}
+                            onDelete={() => deleteComment(item.id)}
+                        ></Comment>
+                    </div>
+                ))
+            }
+
+            <form
+                className={styles.commentForm} ref={commentForm} name='newComment'
+                onSubmit={onCommentSubmit}
+            >
+                <input
+                    className={baseStyles.inputField + ' ' + styles.nameInput}
+                    ref={nameInput} type="text"
+                    name="name"
+                    placeholder="Enter your name" maxLength="50" required
+                />
+                <textarea
+                    className={baseStyles.inputField + ' ' + styles.commentInput}
+                    ref={commentInput}
+                    name="comment"
+                    placeholder="Enter your comment"
+                    required
+                />
+                <button className={baseStyles.button + ' ' + styles.submitBtn} type='submit'>
+                    <span className={styles.submitBtnText}>Comment</span>
+                    <img className={styles.submitBtnImg} src={submitIcon} alt='send'/>
+                </button>
+            </form>
+        </div>
+    );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentsSection);
