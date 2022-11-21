@@ -71,10 +71,15 @@ function CommentsSection({articleId, comments, loadComments, addComment, deleteC
     const commentForm = useRef(null);
 
     useEffect(() => {
-        getComments(articleId).then(comments => {
-            loadComments(comments);
-            setLoading(false);
-        });
+        getComments(articleId)
+            .then(comments => {
+                loadComments(comments);
+                setLoading(false);
+            })
+            .catch(error => console.error(
+                `Error while loading comments on card with id ${articleId}.`,
+                error
+            ));
     }, [articleId, loadComments]);
 
     const [commentFields, commentFieldsDispatch] = useReducer(
