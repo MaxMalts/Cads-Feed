@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
@@ -53,10 +53,10 @@ function CardsFeed({cards, loadCards, addCard}) {
         setCreatingCard(true);
     };
 
-    const onCardCreation = (title, description) => {
+    const onCardCreation = useCallback((title, description) => {
         addCard(title, description);
         setCreatingCard(false);
-    };
+    }, [addCard]);
 
     const sortedCards = getSortedCards();
 
