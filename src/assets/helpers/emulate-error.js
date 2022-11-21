@@ -1,7 +1,7 @@
 const ERROR_PROBABILITY = 0.05;
 
 export default function emulateError() {
-    if (Math.random() > 0.5) {
+    if (Math.random() < ERROR_PROBABILITY) {
         throw new Error("Emulated error");
     }
 }
