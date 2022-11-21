@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react';
+import baseStyles from '@assets/styles/base.module.scss';
 import styles from './NewCard.module.scss';
-import baseStyles from '../assets/styles/base.module.scss';
 
 const actionSetTitleField = 'SET_TITLE_FIELD';
 const actionSetDescrField = 'SET_DESCRIPTION_FIELD';

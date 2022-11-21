@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import likeLiked from '../assets/icons/likeLiked.svg';
-import likeUnliked from '../assets/icons/likeUnliked.svg';
-import styles from './Like.module.scss';
 import classNames from 'classnames/bind';
+import likeLiked from '@assets/icons/likeLiked.svg';
+import likeUnliked from '@assets/icons/likeUnliked.svg';
+import styles from './Like.module.scss';
 
 const cx = classNames.bind(styles);
 

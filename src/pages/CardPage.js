@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import {actionLoadCards} from '../store/actions/cardsActions';
+import {actionLoadCards} from '@store/actions/cardsActions';
 
-import Card from '../components/Card';
-import NotFound from './NotFound.js';
-import {getArticles} from '../assets/helpers/get-articles';
+import Card from '@components/Card';
+import NotFound from '@pages/NotFound.js';
+import {getArticles} from '@assets/helpers/get-articles';
 
 import styles from './CardPage.module.scss';
 

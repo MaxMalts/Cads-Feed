@@ -1,12 +1,15 @@
 import React from 'react';
+import {Routes, Route} from 'react-router-dom'
+
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import {Routes, Route} from 'react-router-dom'
-import rootReducer from './store/reducers/rootReducer';
-import HomePage from './pages/HomePage.js';
-import CardsFeed from './pages/CardsFeed.js';
-import CardPage from './pages/CardPage.js';
-import NotFound from './pages/NotFound.js';
+import rootReducer from '@store/reducers/rootReducer';
+
+import HomePage from '@pages/HomePage.js';
+import NotFound from '@pages/NotFound.js';
+import CardsFeed from '@pages/CardsFeed.js';
+import CardPage from '@pages/CardPage.js';
+
 import styles from './App.module.scss';
 
 const store = createStore(rootReducer);

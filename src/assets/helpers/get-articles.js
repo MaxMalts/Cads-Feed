@@ -1,5 +1,5 @@
-import articles from '../data/articles.json'
-import emulateError from './emulate-error';
+import articles from '@assets/data/articles.json'
+import emulateError from '@assets/helpers/emulate-error.js';
 
 const ARTICLES_LOAD_DURATION = 1500;
 

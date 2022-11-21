@@ -2,17 +2,17 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import {actionAddCard, actionLoadCards} from '../store/actions/cardsActions.js';
+import {actionAddCard, actionLoadCards} from '@store/actions/cardsActions.js';
 
-import {getArticles} from '../assets/helpers/get-articles.js';
-import {dateComparator, numComparator} from '../assets/helpers/sortComparators.js';
+import {getArticles} from '@assets/helpers/get-articles.js';
+import {dateComparator, numComparator} from '@assets/helpers/sortComparators.js';
 
-import Card from '../components/Card.js';
-import NewCard from '../components/NewCard.js';
-import Popup from '../components/Popup.js';
-import SortBy from '../common-components/SortBy.js';
+import Card from '@components/Card.js';
+import NewCard from '@components/NewCard.js';
+import Popup from '@components/Popup.js';
+import SortBy from '@common-components/SortBy.js';
 
-import baseStyles from '../assets/styles/base.module.scss';
+import baseStyles from '@assets/styles/base.module.scss';
 import styles from './CardsFeed.module.scss';
 
 const mapStateToProps = state => ({

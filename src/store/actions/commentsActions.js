@@ -1,5 +1,5 @@
-import * as actionTypes from '../actionTypes.js';
-import getCurDate from '../../assets/helpers/getCurDate.js';
+import * as actionTypes from '@store/actionTypes.js';
+import getCurDate from '@assets/helpers/getCurDate.js';
 
 export const actionLoadCardComments = (articleId, comments) => ({
    type: actionTypes.loadCardComments,

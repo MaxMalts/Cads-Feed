@@ -1,10 +1,10 @@
 import {useCallback, useState} from 'react';
 import {connect} from 'react-redux';
-import Like from '../common-components/Like';
-import CommentsSection from './CommentsSection.js';
-import comment from '../assets/icons/comment.svg';
-import styles from './Card.module.scss';
 import classNames from 'classnames/bind';
+import Like from '@common-components/Like';
+import CommentsSection from '@components/CommentsSection.js';
+import comment from '@assets/icons/comment.svg';
+import styles from './Card.module.scss';
 
 const cx = classNames.bind(styles);
 

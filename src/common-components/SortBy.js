@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './SortBy.module.scss';
 import uuid from 'react-uuid';
+import styles from './SortBy.module.scss';
 
 export default function SortBy({options, onChange, defaultOption}) {
     const id = uuid();
