@@ -35,10 +35,12 @@ function CardsFeed({cards, loadCards, addCard}) {
     const [chosenSortType, setChosenSortType] = useState(sortTypes[0]);
 
     useEffect(() => {
-        getArticles().then(cards => {
-            loadCards(cards);
-            setLoading(false);
-        });
+        getArticles()
+            .then(cards => {
+                loadCards(cards);
+                setLoading(false);
+            })
+            .catch(error => console.error('Error while loading cards.', error));
     }, [loadCards]);
 
     const getSortedCards = () => {
