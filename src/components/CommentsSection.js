@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useReducer, useRef, useState} from 'react';
 
 import {connect} from 'react-redux';
 import {
@@ -90,12 +90,12 @@ function CommentsSection({articleId, comments, loadComments, addComment, deleteC
         return [...comments].sort(comparator);
     };
 
-    const onCommentSubmit = event => {
+    const onCommentSubmit = useCallback(event => {
         event.preventDefault();
         addComment(commentFields.name, commentFields.comment);
         commentForm.current.reset();
         commentFieldsDispatch({type: actionClearFields});
-    };
+    }, [addComment, commentFields]);
 
     const sortedComments = getSortedComments();
 

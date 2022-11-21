@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {connect} from 'react-redux';
 import Like from '../common-components/Like';
 import CommentsSection from './CommentsSection.js';
@@ -17,13 +17,12 @@ function Card({articleId, synaptic, cardData}) {
 
     const [commentsOpened, setCommentsOpened] = useState(false);
 
-    const onCommentClick = event => {
+    const onCommentClick = useCallback(event => {
         event.preventDefault();
-        
         if (!synaptic) {
             setCommentsOpened(!commentsOpened);
         }
-    }
+    }, [synaptic, commentsOpened]);
 
     return (
         <div className={styles.cardContainer}>
@@ -60,9 +59,7 @@ function Card({articleId, synaptic, cardData}) {
             {commentsOpened && (
                 <>
                     <hr className={styles.separator}/>
-                    <CommentsSection
-                        articleId={articleId}
-                    ></CommentsSection>
+                    <CommentsSection articleId={articleId}/>
                 </>
             )}
         </div>
