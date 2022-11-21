@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
@@ -22,97 +22,81 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     loadCards: cards => dispatch(actionLoadCards(cards)),
     addCard: (title, description) => dispatch(actionAddCard(title, description))
-})
+});
 
-class CardsFeed extends React.Component {
-    sortTypes = [
-        'date',
-        'likes'
-    ];
+const sortTypes = [
+    'date',
+    'likes'
+];
 
-    state = {
-        loading: true,
-        creatingCard: false,
-        chosenSortType: this.sortTypes[0]
-    }
+function CardsFeed({cards, loadCards, addCard}) {
+    const [loading, setLoading] = useState(true);
+    const [creatingCard, setCreatingCard] = useState(false);
+    const [chosenSortType, setChosenSortType] = useState(sortTypes[0]);
 
-    constructor(props) {
-        super(props);
-
-        this.onCreateCardClick = this.onCreateCardClick.bind(this);
-        this.onCardCreation = this.onCardCreation.bind(this);
-        this.setSortType = this.setSortType.bind(this);
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         getArticles().then(cards => {
-            this.props.loadCards(cards);
-            this.setState({loading: false});
+            loadCards(cards);
+            setLoading(false);
         });
-    }
+    }, [loadCards]);
 
-    setSortType(sortType) {
-        this.setState({chosenSortType: sortType});
-    }
-
-    getSortedCards() {
-        const comparator = this.state.chosenSortType === 'date'
+    const getSortedCards = () => {
+        const comparator = chosenSortType === 'date'
             ? (item1, item2) => dateComparator(item1.date, item2.date)
             : (item1, item2) => numComparator(item1.currentLikes, item2.currentLikes);
 
-        return [...this.props.cards].sort(comparator);
-    }
+        return [...cards].sort(comparator);
+    };
 
-    onCreateCardClick() {
-        this.setState({creatingCard: true});
-    }
+    const onCreateCardClick = () => {
+        setCreatingCard(true);
+    };
 
-    onCardCreation(title, description) {
-        this.props.addCard(title, description);
-        this.setState({creatingCard: false});
-    }
+    const onCardCreation = (title, description) => {
+        addCard(title, description);
+        setCreatingCard(false);
+    };
 
-    render() {
-        const sortedCards = this.getSortedCards();
+    const sortedCards = getSortedCards();
 
-        return (
-            <>
-                <main className={styles.feedContainer}>
-                    <div className={styles.sortsContainer}>
-                        <SortBy
-                            options={this.sortTypes}
-                            defaultOption={this.state.chosenSortType}
-                            onChange={this.setSortType}
-                        />
-                    </div>
+    return (
+        <>
+            <main className={styles.feedContainer}>
+                <div className={styles.sortsContainer}>
+                    <SortBy
+                        options={sortTypes}
+                        defaultOption={chosenSortType}
+                        onChange={setChosenSortType}
+                    />
+                </div>
 
-                    {this.state.loading
-                        ? 'Loading...'
-                        : sortedCards.map(item => (
-                            <div key={item.articleId} className={styles.card}>
-                                <Link className={styles.cardLink} to={`${item.articleId}`}>
-                                    <Card
-                                        articleId={item.articleId}
-                                        synaptic={true}
-                                    />
-                                </Link>
-                            </div>
-                        ))
-                    }
-                </main>
-
-                <button className={baseStyles.button + ' ' + styles.newCardBtn} onClick={this.onCreateCardClick}>
-                    Add new card
-                </button>
-
-                {this.state.creatingCard &&
-                    <Popup>
-                        <NewCard onCreated={this.onCardCreation}></NewCard>
-                    </Popup>
+                {loading
+                    ? 'Loading...'
+                    : sortedCards.map(item => (
+                        <div key={item.articleId} className={styles.card}>
+                            <Link className={styles.cardLink} to={`${item.articleId}`}>
+                                <Card
+                                    articleId={item.articleId}
+                                    synaptic={true}
+                                />
+                            </Link>
+                        </div>
+                    ))
                 }
-            </>
-        );
-    }
+            </main>
+
+            <button className={baseStyles.button + ' ' + styles.newCardBtn} onClick={onCreateCardClick}>
+                Add new card
+            </button>
+
+            {creatingCard &&
+                <Popup>
+                    <NewCard onCreated={onCardCreation}></NewCard>
+                </Popup>
+            }
+        </>
+    );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardsFeed);
