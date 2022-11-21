@@ -1,5 +1,5 @@
-import comments from '../data/comments.json'
-import emulateError from './emulate-error';
+import comments from '@assets/data/comments.json'
+import emulateError from '@assets/helpers/emulate-error.js';
 
 const COMMENTS_LOAD_DURATION = 1000;
 

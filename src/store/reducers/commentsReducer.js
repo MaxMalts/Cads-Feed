@@ -1,6 +1,6 @@
-import initialState from '../initialState.js';
-import * as actionTypes from '../actionTypes.js';
-import getNewId from '../../assets/helpers/getNewId';
+import initialState from '@store/initialState.js';
+import * as actionTypes from '@store/actionTypes.js';
+import getNewId from '@assets/helpers/getNewId';
 
 const commentsReducer = (state = initialState(), action) => {
     switch (action.type) {

@@ -1,5 +1,5 @@
-import * as actionTypes from '../actionTypes.js';
-import getCurDate from '../../assets/helpers/getCurDate.js';
+import * as actionTypes from '@store/actionTypes.js';
+import getCurDate from '@assets/helpers/getCurDate.js';
 
 export const actionLoadCards = cards => ({
     type: actionTypes.loadCards,

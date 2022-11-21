@@ -5,17 +5,17 @@ import {
     actionAddComment,
     actionDeleteComment,
     actionLoadCardComments
-} from '../store/actions/commentsActions.js';
+} from '@store/actions/commentsActions.js';
 
-import {getComments} from '../assets/helpers/get-comments-by-article.js';
-import {dateComparator, numComparator} from '../assets/helpers/sortComparators';
+import {getComments} from '@assets/helpers/get-comments-by-article.js';
+import {dateComparator, numComparator} from '@assets/helpers/sortComparators';
 
-import Comment from './Comment.js';
-import SortBy from '../common-components/SortBy.js';
+import Comment from '@components/Comment.js';
+import SortBy from '@common-components/SortBy.js';
 
-import submitIcon from '../assets/icons/send.svg';
+import submitIcon from '@assets/icons/send.svg';
 
-import baseStyles from '../assets/styles/base.module.scss';
+import baseStyles from '@assets/styles/base.module.scss';
 import styles from './CommentsSection.module.scss';
 
 const mapStateToProps = (state, {articleId}) => ({

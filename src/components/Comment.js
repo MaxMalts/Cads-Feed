@@ -1,6 +1,6 @@
-import deleteIcon from '../assets/icons/delete.svg'
+import Like from '@common-components/Like';
+import deleteIcon from '@assets/icons/delete.svg'
 import styles from './Comment.module.scss';
-import Like from '../common-components/Like';
 
 export default function Comment({commentData, onDelete}) {
     return (
