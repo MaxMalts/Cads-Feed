@@ -27,12 +27,14 @@ function CardPage({loadCards}) {
 
         getArticles().then(cards => {
             loadCards(cards);
-            if (!cards.some(item => item.articleId === articleId)) {
+            if (cards.some(item => item.articleId === articleId)) {
+                console.log(`${new Date().toString()}: visited the card with id ${articleId}.`);
+            } else {
                 setNotFound(true);
             }
             setLoading(false);
         });
-    }, []);
+    }, [articleId, loadCards]);
 
     return notFound
         ? <NotFound/>
