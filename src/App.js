@@ -11,12 +11,15 @@ import CardsFeed from '@pages/CardsFeed.js';
 import CardPage from '@pages/CardPage.js';
 
 import styles from './App.module.scss';
+import Header from '@components/Header';
 
 const store = createStore(rootReducer);
 
 const App = () => (
     <Provider store={store}>
         <div className={styles.app}>
+            <Header/>
+
             <Routes>
                 <Route path='/' element={<HomePage/>}/>
                 <Route path='/articles' element={<CardsFeed/>}/>
