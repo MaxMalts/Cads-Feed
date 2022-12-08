@@ -1,3 +1,14 @@
+import checkHash from '@assets/helpers/checkHash.js';
+
 export default function getUser() {
-    return JSON.parse(window.localStorage.getItem('user'));
+    const user = JSON.parse(window.localStorage.getItem('user'));
+    if (user) {
+        if (!checkHash(JSON.stringify(user.userData), user.hash)) {
+            throw new Error('Security error: wrong user hash.');
+        }
+
+        return user.userData;
+    }
+
+    return null;
 }
