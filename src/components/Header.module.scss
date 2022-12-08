@@ -55,23 +55,10 @@
 }
 
 .userName {
-    margin-right: 15px;
+    margin-right: 18px;
+    font-size: 0.9rem;
 }
 
 .signOutBtn, .loginBtn {
-    background: var(--primary-color);
-    padding: 3px 7px;
-
-    border: 1px solid var(--secondary-color);
-    border-radius: 4px;
-
     font-size: 0.7rem;
-
-    cursor: pointer;
-
-    transition: filter 100ms;
-
-    &:hover {
-        filter: brightness(0.97);
-    }
 }
