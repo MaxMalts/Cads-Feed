@@ -6,7 +6,6 @@ import styles from './Header.module.scss';
 
 export default function Header() {
     const user = getUser();
-    console.log(user);
 
     const navigate = useNavigate();
 

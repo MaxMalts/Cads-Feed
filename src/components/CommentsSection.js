@@ -9,6 +9,7 @@ import {
 
 import {getComments} from '@assets/helpers/get-comments-by-article.js';
 import {dateComparator, numComparator} from '@assets/helpers/sortComparators';
+import getUser from '@assets/helpers/getUser.js';
 
 import Comment from '@components/Comment.js';
 import SortBy from '@common-components/SortBy.js';
@@ -28,18 +29,11 @@ const mapDispatchToProps = (dispatch, {articleId}) => ({
     deleteComment: id => dispatch(actionDeleteComment(articleId, id))
 });
 
-const actionSetNameField = 'SET_NAME_FIELD';
 const actionSetCommentField = 'SET_COMMENT_FIELD';
 const actionClearFields = 'CLEAR_FIELDS';
 
 function commentFieldsReducer(state, action) {
     switch(action.type) {
-        case actionSetNameField: {
-            return {
-                ...state,
-                name: action.payload.name
-            };
-        }
         case actionSetCommentField: {
             return {
                 ...state,
@@ -84,7 +78,7 @@ function CommentsSection({articleId, comments, loadComments, addComment, deleteC
 
     const [commentFields, commentFieldsDispatch] = useReducer(
         commentFieldsReducer,
-        {name: '', comment: ''}
+        {comment: ''}
     );
 
     const getSortedComments = () => {
@@ -97,7 +91,8 @@ function CommentsSection({articleId, comments, loadComments, addComment, deleteC
 
     const onCommentSubmit = useCallback(event => {
         event.preventDefault();
-        addComment(commentFields.name, commentFields.comment);
+        const user = getUser();
+        addComment(user ? user.name : 'Anonym', commentFields.comment);
         commentForm.current.reset();
         commentFieldsDispatch({type: actionClearFields});
     }, [addComment, commentFields]);
@@ -131,20 +126,6 @@ function CommentsSection({articleId, comments, loadComments, addComment, deleteC
                 className={styles.commentForm} ref={commentForm} name='newComment'
                 onSubmit={onCommentSubmit}
             >
-                <input
-                    className={baseStyles.inputField + ' ' + styles.nameInput}
-                    type="text"
-                    name="name"
-                    placeholder="Enter your name"
-                    maxLength="50"
-                    required
-                    onChange={event => commentFieldsDispatch({
-                        type: actionSetNameField,
-                        payload: {
-                            name: event.target.value
-                        }
-                    })}
-                />
                 <textarea
                     className={baseStyles.inputField + ' ' + styles.commentInput}
                     name="comment"
