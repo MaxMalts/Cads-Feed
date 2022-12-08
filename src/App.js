@@ -7,6 +7,7 @@ import rootReducer from '@store/reducers/rootReducer';
 
 import HomePage from '@pages/HomePage.js';
 import NotFound from '@pages/NotFound.js';
+import LoginPage from '@pages/LoginPage.js';
 import CardsFeed from '@pages/CardsFeed.js';
 import CardPage from '@pages/CardPage.js';
 
@@ -22,6 +23,7 @@ const App = () => (
 
             <Routes>
                 <Route path='/' element={<HomePage/>}/>
+                <Route path='/auth' element={<LoginPage/>}/>
                 <Route path='/articles' element={<CardsFeed/>}/>
                 <Route path='/articles/:articleId' element={<CardPage/>}/>
                 <Route path='*' element={<NotFound/>}/>

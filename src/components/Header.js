@@ -1,9 +1,23 @@
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import getUser from '@assets/helpers/getUser.js';
+import signOut from '@assets/helpers/signOut.js';
+import baseStyles from '@assets/styles/base.module.scss';
 import styles from './Header.module.scss';
-import getUser from '@assets/helpers/getUser';
 
 export default function Header() {
     const user = getUser();
+    console.log(user);
+
+    const navigate = useNavigate();
+
+    const onSignOut = () => {
+        signOut();
+        navigate(0);  // refresh
+    }
+
+    const onSignIn = () => {
+        navigate('/auth');
+    }
 
     return (
         <header className={styles.header}>
@@ -17,10 +31,22 @@ export default function Header() {
                     ? (
                         <>
                             <div className={styles.userName}>{user.name}</div>
-                            <button className={styles.signOutBtn}>Sign Out</button>
+                            <button
+                                className={baseStyles.button + ' ' + styles.signOutBtn}
+                                onClick={onSignOut}
+                            >
+                                Sign Out
+                            </button>
                         </>
                     )
-                    : <button className={styles.loginBtn}>Login</button>
+                    : (
+                        <button
+                            className={baseStyles.button + ' ' + styles.loginBtn}
+                            onClick={onSignIn}
+                        >
+                            Sign In
+                        </button>
+                    )
                 }
             </div>
         </header>
