@@ -1,0 +1,18 @@
+[
+    {
+        "userData": {
+            "username": "admin",
+            "name": "Admin",
+            "passwordHash": "7407946a7a90b037ba5e825040f184a142161e4c61d81feb83ec8c7f011a99b0d77f39c9170c3231e1003c5cf859c69bd93043b095feff5cce6f6d45ec513764"
+        },
+        "hash": "85342e81786caf094fc2b66560cb13af0550a05285a738d4976cbd95ab80b770708189e5e54dc8728bc769fdc390d273b56b15398091486280928d534e87c760"
+    },
+    {
+        "userData": {
+            "username": "thebestuser",
+            "name": "The Best User",
+            "passwordHash": "aa77c1b9b7021937f820cc53cfa234ff49695dbfcfee83d283d1d68b180c2a56a3984d637e677a7c0cb8d943d01c9019810e5608266bb18ca649f1a64c661c7f"
+        },
+        "hash": "65870c4555798e1ab128258f2dc850469035d0db3c2328757152be4923ecf0d48c34202309af3b0720f52f8497325a868c746e828a3d37ec9b48071d74dec72d"
+    }
+]
