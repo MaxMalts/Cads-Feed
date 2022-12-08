@@ -3,14 +3,14 @@
 .header {
     width: 100%;
     height: 60px;
-    padding: 0 30px;
+    padding: 0 5%;
     box-sizing: border-box;
 
     background: var(--primary-color-soft);
     box-shadow: 0 -15px 30px var(--secondary-color);
 
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }

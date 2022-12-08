@@ -3,8 +3,8 @@ import styles from './Header.module.scss';
 import getUser from '@assets/helpers/getUser';
 
 export default function Header() {
-    const user = {name: "Test User Name"};
-    
+    const user = getUser();
+
     return (
         <header className={styles.header}>
             <nav className={styles.navbar}>
