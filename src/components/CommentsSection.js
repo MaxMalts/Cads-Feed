@@ -7,9 +7,9 @@ import {
     actionLoadCardComments
 } from '@store/actions/commentsActions.js';
 
-import {getComments} from '@assets/helpers/get-comments-by-article.js';
+import {getComments} from '@assets/server-mocks/getCommentsByArticle.js';
 import {dateComparator, numComparator} from '@assets/helpers/sortComparators';
-import getUser from '@assets/helpers/getUser.js';
+import getUser from '@assets/server-mocks/getUser.js';
 
 import Comment from '@components/Comment.js';
 import SortBy from '@common-components/SortBy.js';

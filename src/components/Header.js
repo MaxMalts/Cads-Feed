@@ -1,6 +1,6 @@
 import {Link, useNavigate} from 'react-router-dom';
-import getUser from '@assets/helpers/getUser.js';
-import signOut from '@assets/helpers/signOut.js';
+import getUser from '@assets/server-mocks/getUser.js';
+import signOut from '@assets/server-mocks/signOut.js';
 import baseStyles from '@assets/styles/base.module.scss';
 import styles from './Header.module.scss';
 
