@@ -1,4 +1,4 @@
-import checkHash from '@assets/helpers/checkHash.js';
+import checkHash from '@assets/server-mocks/checkHash.js';
 
 export default function getUser() {
     const user = JSON.parse(window.localStorage.getItem('user'));

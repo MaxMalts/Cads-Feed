@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {actionAddCard, actionLoadCards} from '@store/actions/cardsActions.js';
 
-import {getArticles} from '@assets/helpers/get-articles.js';
+import {getArticles} from '@assets/server-mocks/getArticles.js';
 import {dateComparator, numComparator} from '@assets/helpers/sortComparators.js';
 
 import Card from '@components/Card.js';

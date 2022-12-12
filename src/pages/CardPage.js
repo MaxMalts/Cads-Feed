@@ -6,7 +6,7 @@ import {actionLoadCards} from '@store/actions/cardsActions';
 
 import Card from '@components/Card';
 import NotFound from '@pages/NotFound.js';
-import {getArticles} from '@assets/helpers/get-articles';
+import {getArticles} from '@assets/server-mocks/getArticles';
 
 import styles from './CardPage.module.scss';
 

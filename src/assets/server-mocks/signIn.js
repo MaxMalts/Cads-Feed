@@ -1,5 +1,5 @@
-import checkHash from '@assets/helpers/checkHash.js';
-import users from '@assets/data/users.json';
+import checkHash from '@assets/server-mocks/checkHash.js';
+import users from '@assets/server-mocks/data/users.json';
 
 export default function signIn(username, password) {
     const foundUser = users.find(item => (

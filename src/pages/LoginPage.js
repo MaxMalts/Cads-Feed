@@ -1,6 +1,6 @@
 import {useReducer, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import signIn from '@assets/helpers/signIn.js';
+import signIn from '@assets/server-mocks/signIn.js';
 import styles from './LoginPage.module.scss';
 import baseStyles from '@assets/styles/base.module.scss';
 
